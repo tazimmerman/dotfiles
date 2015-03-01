@@ -1,0 +1,14 @@
+--style=kr
+--align-pointer=name
+--align-reference=name
+--indent=spaces=4
+--break-blocks
+--indent-namespaces
+--indent-classes
+--indent-switches
+--indent-cases
+--indent-labels
+--pad-oper
+--pad-header
+--unpad-paren
+--max-instatement-indent=100
