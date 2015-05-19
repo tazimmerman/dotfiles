@@ -1,0 +1,15 @@
+hardstatus alwayslastline
+hardstatus string '%{= dg}[ %{K}%l %{g}][%= %{= dk}%?%-Lw%?%{r}(%{K}%n*%f %t%?(%u)%?%{r})%{k}%?%+Lw%?%?%= %{g}][ %{K}%m/%d/%y %{g}]'
+
+msgwait 1
+startup_message off
+
+defflow off
+defmonitor off
+defscrollback 16384
+
+select 0
+
+attrcolor b ".I"
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+termcapinfo xterm-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
