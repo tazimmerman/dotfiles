@@ -67,16 +67,6 @@ Plugin 'tomasr/molokai'
 call vundle#end()
 " End Vundle plugin management
 
-let java_comment_strings=1
-let java_highlight_debug=1
-let java_highlight_functions='style'
-let java_allow_cpp_keywords=1
-
-let python_highlight_all=1
-let python_version_2=1
-
-let g:xml_syntax_folding=1
-
 let g:ctrlp_clear_cache_on_exit=1
 let g:ctrlp_show_hidden=0
 let g:ctrlp_switch_buffer=1
