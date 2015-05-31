@@ -1,72 +1,132 @@
-set nocompatible
+" General {{{
 set backspace=start,indent,eol
-set wildmenu
-set wildmode=list:longest,full
-set wildignore=*/.git/*,*/.hg/*,*/.svn/*,*/tmp/*,*.pyc,*.pyo,*.so,*.o,*.dll,*.lib,*.pyd,*.obj,*.h5,*.ttf,*.pdf,*.xls,*.pcl,*.tar,*.gz,*.png,*.gif,*.jpg,*.dat,tags
-set complete=.,w,b,u,t
-set completeopt=menu,preview
+set browsedir=buffer
+set comments=sr:/*,mb:*,ex:*/
+set encoding=utf-8
+set fillchars= 
+set formatoptions=tcrqn
+set hidden
+set laststatus=2
+set listchars=tab:\|\ ,extends:>,precedes:<
+set makeprg=make
+set noswapfile
+set nowrap
+set ruler
+set scrolloff=5
+set showmatch
+set switchbuf=usetab
+set tags=./tags;
+" }}}
+
+" Grep {{{
+if has('unix')
+    set grepprg=~/.local/bin/ack\ -s\ --with-filename\ --nocolor\ --nogroup\ --column
+    set grepformat=%f:%l:%c:%m
+endif
+" }}}
+
+" Search {{{
 set ignorecase
 set smartcase
 set infercase
-set showmatch
 set hlsearch
 set incsearch
-set ruler
-set nowrap
 set nowrapscan
-set comments=sr:/*,mb:*,ex:*/
-set formatoptions=cqr
-set makeprg=make
-set fileformats=unix,dos
-set encoding=utf-8
-set browsedir=buffer
-set switchbuf=usetab
-set sessionoptions=blank,buffers,curdir,folds,help,resize,tabpages,winpos,winsize
+" }}}
+
+" Completion {{{
+set wildmenu
+set wildmode=list:longest,full
+set complete=.,w,b,u,t
+set completeopt=menu,preview
+" }}}
+
+" Wild Ignore {{{
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+set wildignore+=*/tmp/*
+set wildignore+=*.pyc,*.pyo,*.pyd
+set wildignore+=*.so,*.o,*.dll,*.lib,*.obj,*.exe
+set wildignore+=*.ttf,*.pdf,*.xls,*.xlsx,*.doc,*.docx
+set wildignore+=*.h5,*.pcl,*.dat
+set wildignore+=*.tar,*.gz,*.bz2
+set wildignore+=*.png,*.gif,*.jpg,*.bmp,*.ico
+set wildignore+=cscope.out,tags
+" }}}
+
+" Win32/64 {{{
+if has('win32') || has('win64')
+    set fileformats=unix,dos
+    set shellslash
+endif
+" }}}
+
+" MacOS {{{
+if has('mac')
+    set guifont=Sauce\ Code\ Powerline:h16
+endif
+" }}}
+
+" UI {{{
+set background=dark
 set mousehide
-set hidden
-set noswapfile
-set shellslash
-set fillchars= 
-set foldmethod=indent
-set foldlevel=20
-set laststatus=2
-set t_Co=256
 set winminheight=0
 set winminwidth=0
-set updatetime=2000
-set antialias
-set scrolloff=5
-set listchars=tab:\|\ ,extends:>,precedes:<
-set tags=./tags;
-set runtimepath+=~/.vim/bundle/Vundle.vim,~/.local/share/vim
 
-" Disable Git SSL verification
-let $GIT_SSL_NO_VERIFY='true'
+if has('gui_running')
+    set antialias " Mac OSX only
+    set guioptions=ai
+    set guifont=Terminess\ Powerline\ 12
+else
+    set t_Co=256
+endif
+" }}}
 
-" Begin Vundle plugin management
-filetype off
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'ervandew/supertab'
-Plugin 'SirVer/ultisnips'
-Plugin 'vcscommand.vim'
-Plugin 'hdima/python-syntax'
-Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'bling/vim-airline'
-Plugin 'tpope/vim-abolish'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'justinmk/vim-sneak'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'chriskempson/base16-vim'
-Plugin 'tomasr/molokai'
-"Plugin 'ivalkeen/vim-ctrlp-tjump'
-"Plugin 'fisadev/vim-ctrlp-cmdpalette'
-call vundle#end()
-" End Vundle plugin management
+" Auto Commands {{{
+augroup CursorLine
+    autocmd!
+    autocmd WinLeave,InsertEnter * set nocursorline
+    autocmd WinEnter,InsertLeave * set cursorline
+augroup end
+" }}}
 
+" Syntax, Filetype {{{
+syntax on
+filetype on
+filetype indent on
+filetype plugin on
+syntax sync fromstart
+" }}}
+
+" Plug-ins {{{
+call plug#begin('~/.vim/bundle')
+Plug 'kien/ctrlp.vim'
+Plug 'scrooloose/syntastic'
+Plug 'ervandew/supertab'
+Plug 'SirVer/ultisnips'
+Plug 'hdima/python-syntax'
+Plug 'hynek/vim-python-pep8-indent'
+Plug 'bling/vim-airline'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'justinmk/vim-sneak'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'chriskempson/base16-vim'
+Plug 'morhetz/gruvbox'
+"Plug 'ivalkeen/vim-ctrlp-tjump'
+"Plug 'fisadev/vim-ctrlp-cmdpalette'
+call plug#end()
+" }}}
+
+" Gruvbox {{{
+colorscheme gruvbox
+" }}}
+
+" Sneak {{{
+let g:sneak#streak=1
+" }}}
+
+" Ctrl-P {{{
 let g:ctrlp_clear_cache_on_exit=1
 let g:ctrlp_show_hidden=0
 let g:ctrlp_switch_buffer=1
@@ -76,47 +136,40 @@ let g:ctrlp_root_markers=['cscope.out', 'tags']
 let g:ctrlp_extensions=['buffertag']
 let g:ctrlp_buftag_ctags_bin='/home/tzimmerm/tp/vim/7.4/bin/ctags'
 let g:ctrlp_by_filename=1
+" }}}
 
-let g:UltiSnipsSnippetDirectories=["ultisnips"]
+" UltiSnips {{{
+let g:UltiSnipsSnippetDirectories=['ultisnips']
+" }}}
 
+" Syntastic {{{
 let g:syntastic_javascript_checkers=['jshint']
 let g:syntastic_python_checkers=['pyflakes', 'pep8']
 let g:syntastic_auto_loc_list=1
-let g:syntastic_enable_signs=has("gui")
-let g:syntastic_enable_highlighting=has("gui")
-let g:syntastic_enable_balloons=has("gui")
-let g:syntastic_mode_map = { 'mode': 'passive' }
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_style_error_symbol = '✗'
-let g:syntastic_style_warning_symbol = '⚠'
+let g:syntastic_enable_signs=has('gui')
+let g:syntastic_enable_highlighting=has('gui')
+let g:syntastic_enable_balloons=has('gui')
+let g:syntastic_mode_map={ 'mode': 'passive' }
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_style_error_symbol='✗'
+let g:syntastic_style_warning_symbol='⚠'
+" }}}
 
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
+" Airline {{{
+let g:airline_powerline_fonts=1
+let g:airline#extensions#whitespace#enabled=0
+" }}}
 
-let g:VCSCommandSVNExec='/auto/csmodeldata/foopen/AMD64/svn185/python2.7/bin/svn'
-
-augroup VCSCommand
-    au User VCSBufferCreated silent! nmap <unique> <buffer> q :bwipeout<CR>
-augroup END
-
-syntax on
-filetype on
-filetype indent on
-filetype plugin on
-syntax sync fromstart
-
+" Commands {{{
 " Jump to the next diff and obtain it (repeat with @@, followed by @:)
-command -nargs=0 DO :normal ]cdo<CR>
+command -nargs=0 Fix :normal ]cdo<CR>
 
+" Find TODO, XXX, etc.
+command -nargs=0 Todo :lvimgrep /\#\s*\(XXX\|TODO\|NOTE\)/ %<CR>
+" }}}
+
+" Mappings {{{
 " Popup navigation
 inoremap <silent> <C-K> <C-R>=pumvisible() ? "\<lt>C-P>" : "\<lt>C-K>"<CR>
 inoremap <silent> <C-J> <C-R>=pumvisible() ? "\<lt>C-N>" : "\<lt>C-J>"<CR>
@@ -136,16 +189,29 @@ nmap <silent> <leader>sr :SyntasticReset<CR>
 
 " Wrap a word in quotes
 nmap <silent> <leader>q' ciw'<C-R><C-O>"'<Esc>
-nmap <silent> <leader>q" ciw'<C-R><C-O>"'<Esc>
+nmap <silent> <leader>q" ciw"<C-R><C-O>""<Esc>
+nmap <silent> <leader>q" ciw"<C-R><C-O>""<Esc>
+nmap <silent> <leader>q( ciw(<C-R><C-O>")<Esc>
+nmap <silent> <leader>q[ ciw[<C-R><C-O>"]<Esc>
+nmap <silent> <leader>q{ ciw{<C-R><C-O>"}<Esc>
+nmap <silent> <leader>q< ciw<<C-R><C-O>"><Esc>
 
-if has("cscope")
+" Format a paragraph
+noremap <silent> <leader>gq gqap
+
+" Inverse of g]
+nnoremap <silent> g[ :pop<CR>
+" }}}
+
+" Cscope {{{
+if has('cscope')
     set cscopeprg=cscope
     set cscopetag
     set cscopetagorder=1
     set cscopequickfix=s-,c-,d-,i-,t-,e-
     set nocscopeverbose
 
-    if filereadable("cscope.out")
+    if filereadable('cscope.out')
         cs add cscope.out
     elseif $CSCOPE_DB != ""
         cs add $CSCOPE_DB
@@ -170,14 +236,35 @@ if has("cscope")
     " View the tag (g-] behavior)
     nmap <C-@>] :tselect <C-R>=expand("<cword>")<CR><CR>
 endif
+" }}}
 
-set background=dark
-colorscheme base16-default
-set cursorline
+" tab_complete() {{{
+function! s:tab_complete()
+    if pumvisible()
+        return "\<C-N>"
+    endif
+    if strpart(getline('.'), 0, col('.')-1) =~ '^\s*$'
+        return "\<Tab>"
+    elseif exists('&omnifunc') && &omnifunc != ''
+        return "\<C-X>\<C-O>"
+    else
+        return "\<C-N>"
+    endif
+endfunction
+inoremap <silent> <C-@> <C-R>=<SID>tab_complete()<CR>
+" }}}
 
-if has("gui_running")
-    set guioptions=ai
-    set guifont=Sauce\ Code\ Powerline:h16
-    set lines=32
-    set columns=128
-endif
+" google_it() {{{
+function! s:google_it(phrase)
+    let url='https://www.google.com/search?q='
+    let q=substitute(
+                \ '"'.a:phrase.'"',
+                \ '[^A-Za-z0-9_.~-]',
+                \ '\="%".printf("%02X", char2nr(submatch(0)))',
+                \ 'g')
+    call system('/home/tzimmerm/firefox/latest/firefox ' . url . q)
+endfunction
+nnoremap <silent> <leader>? :call <SID>google_it(expand("<cWORD>"))<CR>
+" }}}
+
+" vim: foldmethod=marker
