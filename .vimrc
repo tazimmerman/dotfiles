@@ -60,20 +60,16 @@ if has('win32') || has('win64')
 endif
 " }}}
 
-" MacOS {{{
-if has('mac')
-    set guifont=Sauce\ Code\ Powerline:h16
-endif
-" }}}
-
 " UI {{{
 set background=dark
 set mousehide
 set winminheight=0
 set winminwidth=0
 
-if has('gui_running')
-    set antialias " Mac OSX only
+if has('gui_macvim')
+    set antialias
+    set guifont=Sauce\ Code\ Powerline:h16
+elseif has('gui_running')
     set guioptions=ai
     set guifont=Terminess\ Powerline\ 12
 else
