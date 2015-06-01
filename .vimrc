@@ -83,8 +83,10 @@ endif
 " Auto Commands {{{
 augroup CursorLine
     autocmd!
-    autocmd WinLeave,InsertEnter * set nocursorline
-    autocmd WinEnter,InsertLeave * set cursorline
+    autocmd WinEnter * set cursorline colorcolumn=+1
+    autocmd WinLeave * set nocursorline colorcolumn=
+    autocmd InsertEnter * set nocursorline
+    autocmd InsertLeave * set cursorline
 augroup end
 " }}}
 
