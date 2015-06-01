@@ -254,6 +254,8 @@ inoremap <silent> <C-@> <C-R>=<SID>tab_complete()<CR>
 " }}}
 
 " google_it() {{{
+let s:open_cmd=executable('xdg-open') ? 'xdg-open ' : 'open '
+
 function! s:google_it(phrase)
     let url='https://www.google.com/search?q='
     let q=substitute(
@@ -261,7 +263,7 @@ function! s:google_it(phrase)
                 \ '[^A-Za-z0-9_.~-]',
                 \ '\="%".printf("%02X", char2nr(submatch(0)))',
                 \ 'g')
-    call system('/home/tzimmerm/firefox/latest/firefox ' . url . q)
+    call system(s:open_cmd . url . q)
 endfunction
 nnoremap <silent> <leader>? :call <SID>google_it(expand("<cWORD>"))<CR>
 " }}}
