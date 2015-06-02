@@ -68,6 +68,14 @@ set mousehide
 set winminheight=0
 set winminwidth=0
 
+if has('clipboard')
+    if has('unnamedplus')
+        set clipboard=unnamedplus
+    else
+        set clipboard=unnamed
+    endif
+endif
+
 if has('gui')
     set guioptions=ai
 endif
