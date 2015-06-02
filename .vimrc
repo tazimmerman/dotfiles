@@ -62,6 +62,8 @@ endif
 
 " UI {{{
 set background=dark
+set colorcolumn=+1
+set cursorline
 set mousehide
 set winminheight=0
 set winminwidth=0
@@ -103,7 +105,6 @@ call plug#begin('~/.vim/bundle')
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/syntastic'
 Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'
 Plug 'hdima/python-syntax'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'bling/vim-airline'
@@ -114,6 +115,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'chriskempson/base16-vim'
 Plug 'morhetz/gruvbox'
+Plug 'bkad/CamelCaseMotion'
 "Plug 'ivalkeen/vim-ctrlp-tjump'
 "Plug 'fisadev/vim-ctrlp-cmdpalette'
 call plug#end()
@@ -137,10 +139,6 @@ let g:ctrlp_root_markers=['cscope.out', 'tags']
 let g:ctrlp_extensions=['buffertag']
 let g:ctrlp_buftag_ctags_bin='/home/tzimmerm/tp/vim/7.4/bin/ctags'
 let g:ctrlp_by_filename=1
-" }}}
-
-" UltiSnips {{{
-let g:UltiSnipsSnippetDirectories=['ultisnips']
 " }}}
 
 " Syntastic {{{
@@ -182,7 +180,7 @@ nmap <Space> <leader>
 nmap <silent> <leader><BS> :%s/\s\+$//g<CR>
 
 " Reset search pattern
-nmap <silent> <leader><ESC> :let @/=""<CR>
+nmap <silent> <leader><ESC> :nohlsearch<CR>
 
 " Syntastic check/reset
 nmap <silent> <leader>sc :SyntasticCheck<CR>
@@ -268,6 +266,13 @@ function! s:google_it(phrase)
     call system(s:open_cmd . url . q)
 endfunction
 nnoremap <silent> <leader>? :call <SID>google_it(expand("<cWORD>"))<CR>
+" }}}
+
+" grep_buffers() {{{
+function! s:grep_buffers(word)
+    silent execute ":cclose|cex []|bufdo vimgrepadd /" . a:word . "/j %|cwindow"
+endfunction
+nnoremap <silent> <leader>/ :call <SID>grep_buffers(expand("<cWORD>"))<CR>
 " }}}
 
 " vim: foldmethod=marker
