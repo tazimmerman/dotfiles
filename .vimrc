@@ -1,7 +1,6 @@
 " General {{{
 set backspace=start,indent,eol
 set browsedir=buffer
-set comments=sr:/*,mb:*,ex:*/
 set encoding=utf-8
 set fillchars= 
 set formatoptions=tcrqn
