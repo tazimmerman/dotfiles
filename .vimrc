@@ -125,6 +125,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'chriskempson/base16-vim'
 Plug 'morhetz/gruvbox'
 Plug 'bkad/CamelCaseMotion'
+Plug 'jiangmiao/auto-pairs'
 "Plug 'ivalkeen/vim-ctrlp-tjump'
 "Plug 'fisadev/vim-ctrlp-cmdpalette'
 call plug#end()
