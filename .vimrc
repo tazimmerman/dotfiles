@@ -78,7 +78,7 @@ set winminheight=0
 set winminwidth=0
 
 if has('gui')
-    set guioptions=ai
+    set guioptions=aci
 endif
 
 if has('gui_macvim')
@@ -120,7 +120,6 @@ Plug 'bling/vim-airline'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'justinmk/vim-sneak'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'chriskempson/base16-vim'
 Plug 'morhetz/gruvbox'
@@ -133,10 +132,6 @@ call plug#end()
 
 " Gruvbox {{{
 colorscheme gruvbox
-" }}}
-
-" Sneak {{{
-let g:sneak#streak=1
 " }}}
 
 " Ctrl-P {{{
@@ -184,32 +179,41 @@ inoremap <silent> <C-K> <C-R>=pumvisible() ? "\<lt>C-P>" : "\<lt>C-K>"<CR>
 inoremap <silent> <C-J> <C-R>=pumvisible() ? "\<lt>C-N>" : "\<lt>C-J>"<CR>
 
 " Alias space to leader
-nmap <Space> <leader>
+map <Space> <leader>
 
 " Erase trailing whitespace on any line
-nmap <silent> <leader><BS> :%s/\s\+$//g<CR>
+nnoremap <silent> <leader><BS> :%s/\s\+$//g<CR>
 
 " Reset search pattern
-nmap <silent> <leader><ESC> :nohlsearch<CR>
+nnoremap <silent> <leader><ESC> :nohlsearch<CR>
 
 " Syntastic check/reset
-nmap <silent> <leader>sc :SyntasticCheck<CR>
-nmap <silent> <leader>sr :SyntasticReset<CR>
+nnoremap <silent> <leader>sc :SyntasticCheck<CR>
+nnoremap <silent> <leader>sr :SyntasticReset<CR>
 
 " Wrap a word in quotes
-nmap <silent> <leader>q' ciw'<C-R><C-O>"'<Esc>
-nmap <silent> <leader>q" ciw"<C-R><C-O>""<Esc>
-nmap <silent> <leader>q" ciw"<C-R><C-O>""<Esc>
-nmap <silent> <leader>q( ciw(<C-R><C-O>")<Esc>
-nmap <silent> <leader>q[ ciw[<C-R><C-O>"]<Esc>
-nmap <silent> <leader>q{ ciw{<C-R><C-O>"}<Esc>
-nmap <silent> <leader>q< ciw<<C-R><C-O>"><Esc>
+nnoremap <silent> <leader>q' ciw'<C-R><C-O>"'<Esc>
+nnoremap <silent> <leader>q" ciw"<C-R><C-O>""<Esc>
+nnoremap <silent> <leader>q" ciw"<C-R><C-O>""<Esc>
+nnoremap <silent> <leader>q( ciw(<C-R><C-O>")<Esc>
+nnoremap <silent> <leader>q[ ciw[<C-R><C-O>"]<Esc>
+nnoremap <silent> <leader>q{ ciw{<C-R><C-O>"}<Esc>
+nnoremap <silent> <leader>q< ciw<<C-R><C-O>"><Esc>
 
 " Format a paragraph
 noremap <silent> <leader>gq gqap
 
 " Inverse of g]
 nnoremap <silent> g[ :pop<CR>
+
+" Move lines with indent
+nnoremap <silent> <Up> :move-2<CR>==
+nnoremap <silent> <Down> :move+<CR>==
+inoremap <silent> <Up> <Esc>:move-2<CR>==gi
+inoremap <silent> <Down> <Esc>:move+<CR>==gi
+vnoremap <silent> <Up> :move'<-2<CR>gv=gv
+vnoremap <silent> <Down> :move'>+<CR>gv=gv
+
 " }}}
 
 " Cscope {{{
