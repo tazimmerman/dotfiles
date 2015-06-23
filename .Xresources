@@ -1,0 +1,17 @@
+! Xft
+Xft.antialias: true
+Xft.autohint: false
+Xft.dpi: 96
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+Xft.rgba: rgba
+
+! URxvt
+URxvt.font: xft:Fantasque Sans Mono:size=12
+URxvt.cursorBlink: true
+URxvt.loginShell: false
+URxvt.scrollBar: false
+URxvt.termName: screen-256color
+URxvt.depth: 32
+URxvt.background: [75]#000000
