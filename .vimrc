@@ -42,7 +42,7 @@ set completeopt=menu,preview
 
 " Wild Ignore {{{
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
-set wildignore+=*/tmp/*
+set wildignore+=*/tmp/*,*/research-data/*,*/test-data/*
 set wildignore+=*.pyc,*.pyo,*.pyd
 set wildignore+=*.so,*.o,*.dll,*.lib,*.obj,*.exe
 set wildignore+=*.ttf,*.pdf,*.xls,*.xlsx,*.doc,*.docx
