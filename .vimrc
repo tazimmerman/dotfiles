@@ -5,12 +5,10 @@ set encoding=utf-8
 set fillchars= 
 set formatoptions=tcrqn
 set hidden
-set laststatus=2
 set listchars=tab:\|\ ,extends:>,precedes:<
 set makeprg=make
 set noswapfile
 set nowrap
-set ruler
 set scrolloff=5
 set showmatch
 set switchbuf=usetab
@@ -73,6 +71,9 @@ endif
 set background=dark
 set colorcolumn=+1
 set cursorline
+set laststatus=2
+set relativenumber
+set ruler
 set mousehide
 set winminheight=0
 set winminwidth=0
@@ -85,7 +86,7 @@ if has('gui_macvim')
     set antialias
     set guifont=Sauce\ Code\ Powerline:h16
 elseif has('gui_running')
-    set guifont=Terminess\ Powerline\ 12
+    set guifont=Fantasque\ Sans\ Mono\ 12
 else
     set t_Co=256
 endif
@@ -205,6 +206,9 @@ noremap <silent> <leader>gq gqap
 
 " Inverse of g]
 nnoremap <silent> g[ :pop<CR>
+
+" Preview tag on Enter
+nnoremap <silent> <CR> :ptjump <C-R>=expand("<cword>")<CR><CR>
 
 " Move lines with indent
 nnoremap <silent> <Up> :move-2<CR>==
