@@ -85,6 +85,7 @@ endif
 if has('gui_macvim')
     set antialias
     set guifont=Sauce\ Code\ Powerline:h16
+    set transparency=10
 elseif has('gui_running')
     set guifont=Fantasque\ Sans\ Mono\ 12
 else
