@@ -169,7 +169,7 @@ let g:airline#extensions#whitespace#enabled=0
 
 " Commands {{{
 " Jump to the next diff and obtain it (repeat with @@, followed by @:)
-command -nargs=0 Fix :normal ]cdo<CR>
+command -nargs=0 Fix :normal! ]cdo<CR>
 
 " Find TODO, XXX, etc.
 command -nargs=0 Todo :lvimgrep /\#\s*\(XXX\|TODO\|NOTE\)/ %<CR>
