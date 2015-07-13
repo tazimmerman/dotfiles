@@ -34,7 +34,7 @@ set nowrapscan
 " Completion {{{
 set wildmenu
 set wildmode=list:longest,full
-set complete=.,w,b,u,t
+set complete=.,w,b,t
 set completeopt=menu,preview
 " }}}
 
@@ -218,6 +218,13 @@ inoremap <silent> <Up> <Esc>:move-2<CR>==gi
 inoremap <silent> <Down> <Esc>:move+<CR>==gi
 vnoremap <silent> <Up> :move'<-2<CR>gv=gv
 vnoremap <silent> <Down> :move'>+<CR>gv=gv
+
+" Indent and return to Visual mode
+vnoremap <silent> < <gv
+vnoremap <silent> > >gv
+
+" Repeat over lines in Visual mode
+vnoremap <silent> . :normal .<CR>
 
 " }}}
 
