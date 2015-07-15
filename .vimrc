@@ -5,6 +5,7 @@ set encoding=utf-8
 set fillchars= 
 set formatoptions=tcrqn
 set hidden
+set list
 set listchars=tab:\|\ ,extends:>,precedes:<
 set makeprg=make
 set noswapfile
@@ -34,8 +35,8 @@ set nowrapscan
 " Completion {{{
 set wildmenu
 set wildmode=list:longest,full
-set complete=.,w,b,t
-set completeopt=menu,preview
+set complete=.,w,b
+set completeopt=menu
 " }}}
 
 " Wild Ignore {{{
@@ -133,6 +134,8 @@ call plug#end()
 " }}}
 
 " Gruvbox {{{
+"let g:gruvbox_italic=0
+"let g:gruvbox_termcolors=16
 colorscheme gruvbox
 " }}}
 
@@ -209,7 +212,7 @@ noremap <silent> <leader>gq gqap
 nnoremap <silent> g[ :pop<CR>
 
 " Preview tag on Enter
-nnoremap <silent> <CR> :ptjump <C-R>=expand("<cword>")<CR><CR>
+nnoremap <silent> <leader><CR> :ptjump <C-R>=expand("<cword>")<CR><CR>
 
 " Move lines with indent
 nnoremap <silent> <Up> :move-2<CR>==
@@ -226,6 +229,17 @@ vnoremap <silent> > >gv
 " Repeat over lines in Visual mode
 vnoremap <silent> . :normal .<CR>
 
+" }}}
+
+" get_visual_selection() {{{
+function! s:get_visual_selection()
+    let [begln, begcol] = getpos("'<")[1:2]
+    let [endln, endcol] = getpos("'>")[1:2]
+    let lines = getline(begln, endln)
+    let lines[-1] = lines[-1][:endcol - (&selection == 'inclusive' ? 1 : 2)]
+    let lines[0] = lines[0][begcol - 1:]
+    return join(lines, "\n")
+endfunction
 " }}}
 
 " tab_complete() {{{
@@ -256,12 +270,15 @@ function! s:google_it(phrase)
                 \ 'g')
     call system(s:open_cmd . url . q)
 endfunction
+vnoremap <silent> <leader>? :call <SID>google_it(<SID>get_visual_selection())<CR>
 nnoremap <silent> <leader>? :call <SID>google_it(expand("<cWORD>"))<CR>
 " }}}
 
 " grep_buffers() {{{
 function! s:grep_buffers(word)
-    silent execute ":cclose|cex []|bufdo vimgrepadd /" . a:word . "/j %|cwindow"
+    silent cexpr []
+    silent execute ':bufdo | try | vimgrepadd /' . a:word . '/j % | catch | endtry'
+    silent cwindow
 endfunction
 nnoremap <silent> <leader>/ :call <SID>grep_buffers(expand("<cWORD>"))<CR>
 " }}}
