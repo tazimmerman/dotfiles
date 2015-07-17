@@ -126,7 +126,6 @@ Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'chriskempson/base16-vim'
 Plug 'morhetz/gruvbox'
-Plug 'bkad/CamelCaseMotion'
 Plug 'jiangmiao/auto-pairs'
 "Plug 'ivalkeen/vim-ctrlp-tjump'
 "Plug 'fisadev/vim-ctrlp-cmdpalette'
@@ -249,8 +248,6 @@ function! s:tab_complete()
     endif
     if strpart(getline('.'), 0, col('.')-1) =~ '^\s*$'
         return "\<Tab>"
-    elseif exists('&omnifunc') && &omnifunc != ''
-        return "\<C-X>\<C-O>"
     else
         return "\<C-N>"
     endif
@@ -263,11 +260,10 @@ let s:open_cmd=executable('xdg-open') ? 'xdg-open ' : 'open '
 
 function! s:google_it(phrase)
     let url='https://www.google.com/search?q='
-    let q=substitute(
-                \ '"'.a:phrase.'"',
-                \ '[^A-Za-z0-9_.~-]',
-                \ '\="%".printf("%02X", char2nr(submatch(0)))',
-                \ 'g')
+    let q=substitute('"'.a:phrase.'"',
+                   \ '[^A-Za-z0-9_.~-]',
+                   \ '\="%".printf("%02X", char2nr(submatch(0)))',
+                   \ 'g')
     call system(s:open_cmd . url . q)
 endfunction
 vnoremap <silent> <leader>? :call <SID>google_it(<SID>get_visual_selection())<CR>
