@@ -17,8 +17,8 @@ set tags=./tags;
 " }}}
 
 " Grep {{{
-if has('unix')
-    set grepprg=~/.local/bin/ack\ -s\ --with-filename\ --nocolor\ --nogroup\ --column
+if has('unix') && executable('ack')
+    set grepprg=ack\ -s\ --with-filename\ --nocolor\ --nogroup\ --column
     set grepformat=%f:%l:%c:%m
 endif
 " }}}
