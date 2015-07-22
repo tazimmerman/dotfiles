@@ -276,6 +276,7 @@ function! s:grep_buffers(word)
     silent execute ':bufdo | try | vimgrepadd /' . a:word . '/j % | catch | endtry'
     silent cwindow
 endfunction
+vnoremap <silent> <leader>/ :call <SID>grep_buffers(<SID>get_visual_selection())<CR>
 nnoremap <silent> <leader>/ :call <SID>grep_buffers(expand("<cWORD>"))<CR>
 " }}}
 
