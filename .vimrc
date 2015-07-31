@@ -114,7 +114,7 @@ syntax sync fromstart
 
 " Plug-ins {{{
 call plug#begin('~/.vim/bundle')
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/syntastic'
 Plug 'ervandew/supertab'
 Plug 'hdima/python-syntax'
@@ -126,16 +126,19 @@ Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'chriskempson/base16-vim'
 Plug 'morhetz/gruvbox'
+Plug 'crusoexia/vim-monokai'
 Plug 'jiangmiao/auto-pairs'
 "Plug 'ivalkeen/vim-ctrlp-tjump'
 "Plug 'fisadev/vim-ctrlp-cmdpalette'
 call plug#end()
 " }}}
 
-" Gruvbox {{{
-"let g:gruvbox_italic=0
-"let g:gruvbox_termcolors=16
-colorscheme gruvbox
+" Colors {{{
+if has('gui_running')
+    colorscheme base16-monokai
+else
+    colorscheme gruvbox
+endif
 " }}}
 
 " Ctrl-P {{{
@@ -145,9 +148,8 @@ let g:ctrlp_switch_buffer=1
 let g:ctrlp_match_window='max:10,results:100'
 let g:ctrlp_use_caching=1
 let g:ctrlp_root_markers=['cscope.out', 'tags']
-let g:ctrlp_extensions=['buffertag']
-let g:ctrlp_buftag_ctags_bin='/home/tzimmerm/tp/vim/7.4/bin/ctags'
-let g:ctrlp_by_filename=1
+let g:ctrlp_extensions=['buffertag', 'bookmarkdir']
+let g:ctrlp_buftag_ctags_bin='~/.local/bin/ctags'
 " }}}
 
 " Syntastic {{{
