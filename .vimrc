@@ -282,4 +282,10 @@ vnoremap <silent> <leader>/ :call <SID>grep_buffers(<SID>get_visual_selection())
 nnoremap <silent> <leader>/ :call <SID>grep_buffers(expand("<cWORD>"))<CR>
 " }}}
 
+" Local {{{
+if filereadable(glob('~/.vimrc.local'))
+    source ~/.vimrc.local
+endif
+" }}}
+
 " vim: foldmethod=marker
