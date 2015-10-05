@@ -115,6 +115,8 @@ syntax sync fromstart
 " Plug-ins {{{
 call plug#begin('~/.vim/bundle')
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'fisadev/vim-ctrlp-cmdpalette'
+Plug 'ivalkeen/vim-ctrlp-tjump'
 Plug 'scrooloose/syntastic'
 Plug 'ervandew/supertab'
 Plug 'hdima/python-syntax'
@@ -128,8 +130,6 @@ Plug 'chriskempson/base16-vim'
 Plug 'morhetz/gruvbox'
 Plug 'crusoexia/vim-monokai'
 Plug 'jiangmiao/auto-pairs'
-"Plug 'ivalkeen/vim-ctrlp-tjump'
-"Plug 'fisadev/vim-ctrlp-cmdpalette'
 call plug#end()
 " }}}
 
@@ -282,10 +282,10 @@ vnoremap <silent> <leader>/ :call <SID>grep_buffers(<SID>get_visual_selection())
 nnoremap <silent> <leader>/ :call <SID>grep_buffers(expand("<cWORD>"))<CR>
 " }}}
 
+" vim: foldmethod=marker
+
 " Local {{{
 if filereadable(glob('~/.vimrc.local'))
     source ~/.vimrc.local
 endif
 " }}}
-
-" vim: foldmethod=marker
