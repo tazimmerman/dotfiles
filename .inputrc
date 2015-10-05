@@ -1,0 +1,25 @@
+set meta-flag on
+set input-meta on
+set convert-meta on
+set output-meta on
+
+set mark-directories on
+set visible-stats on
+
+# Use Vi, not Emacs, line editing.
+set editing-mode vi
+set completion-ignore-case on
+set show-all-if-ambiguous on
+set menu-complete-display-prefix on
+
+# Keymaps for commnand mode (i.e. after hitting ESC).
+set keymap vi-command
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# Keymaps for insert mode.
+set keymap vi-insert
+TAB: menu-complete
+"\e[Z": menu-complete-backward
+"\e[A": history-search-backward
+"\e[B": history-search-forward
