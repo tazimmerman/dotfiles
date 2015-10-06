@@ -116,7 +116,6 @@ syntax sync fromstart
 call plug#begin('~/.vim/bundle')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fisadev/vim-ctrlp-cmdpalette'
-Plug 'ivalkeen/vim-ctrlp-tjump'
 Plug 'scrooloose/syntastic'
 Plug 'ervandew/supertab'
 Plug 'hdima/python-syntax'
@@ -150,6 +149,7 @@ let g:ctrlp_use_caching=1
 let g:ctrlp_root_markers=['cscope.out', 'tags']
 let g:ctrlp_extensions=['buffertag', 'bookmarkdir']
 let g:ctrlp_buftag_ctags_bin='~/.local/bin/ctags'
+let g:ctrlp_cmdpalette_execute=1
 " }}}
 
 " Syntastic {{{
@@ -230,6 +230,9 @@ vnoremap <silent> > >gv
 " Repeat over lines in Visual mode
 vnoremap <silent> . :normal .<CR>
 
+" Find and run Vim commands
+nnoremap <silent> <C-K> :CtrlPCmdPalette<CR>
+
 " }}}
 
 " get_visual_selection() {{{
@@ -282,10 +285,10 @@ vnoremap <silent> <leader>/ :call <SID>grep_buffers(<SID>get_visual_selection())
 nnoremap <silent> <leader>/ :call <SID>grep_buffers(expand("<cWORD>"))<CR>
 " }}}
 
-" vim: foldmethod=marker
-
 " Local {{{
 if filereadable(glob('~/.vimrc.local'))
     source ~/.vimrc.local
 endif
 " }}}
+
+" vim: foldmethod=marker
