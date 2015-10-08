@@ -117,7 +117,6 @@ call plug#begin('~/.vim/bundle')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fisadev/vim-ctrlp-cmdpalette'
 Plug 'scrooloose/syntastic'
-Plug 'ervandew/supertab'
 Plug 'hdima/python-syntax'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'bling/vim-airline'
@@ -249,15 +248,15 @@ endfunction
 " tab_complete() {{{
 function! s:tab_complete()
     if pumvisible()
-        return "\<C-N>"
+        return "\<C-P>"
     endif
     if strpart(getline('.'), 0, col('.')-1) =~ '^\s*$'
         return "\<Tab>"
     else
-        return "\<C-N>"
+        return "\<C-P>"
     endif
 endfunction
-inoremap <silent> <C-@> <C-R>=<SID>tab_complete()<CR>
+inoremap <silent> <Tab> <C-R>=<SID>tab_complete()<CR>
 " }}}
 
 " google_it() {{{
