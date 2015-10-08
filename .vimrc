@@ -120,10 +120,6 @@ Plug 'scrooloose/syntastic'
 Plug 'hdima/python-syntax'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'bling/vim-airline'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'chriskempson/base16-vim'
 Plug 'morhetz/gruvbox'
 Plug 'crusoexia/vim-monokai'
@@ -193,8 +189,8 @@ nnoremap <silent> <leader><BS> :%s/\s\+$//g<CR>
 nnoremap <silent> <leader><ESC> :nohlsearch<CR>
 
 " Syntastic check/reset
-nnoremap <silent> <leader>sc :SyntasticCheck<CR>
-nnoremap <silent> <leader>sr :SyntasticReset<CR>
+nnoremap <silent> <F6> :SyntasticCheck<CR>
+nnoremap <silent> <F7> :SyntasticReset<CR>
 
 " Wrap a word in quotes
 nnoremap <silent> <leader>q' ciw'<C-R><C-O>"'<Esc>
