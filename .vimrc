@@ -73,6 +73,7 @@ set background=dark
 set colorcolumn=+1
 set cursorline
 set laststatus=2
+set lazyredraw
 set relativenumber
 set ruler
 set mousehide
@@ -120,20 +121,16 @@ Plug 'scrooloose/syntastic'
 Plug 'hdima/python-syntax'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'bling/vim-airline'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'chriskempson/base16-vim'
 Plug 'morhetz/gruvbox'
-Plug 'crusoexia/vim-monokai'
 Plug 'jiangmiao/auto-pairs'
 call plug#end()
 " }}}
 
 " Colors {{{
+let g:gruvbox_italic=1
 if has('gui_running')
-    colorscheme base16-monokai
+    colorscheme gruvbox
 else
     colorscheme gruvbox
 endif
@@ -193,8 +190,8 @@ nnoremap <silent> <leader><BS> :%s/\s\+$//g<CR>
 nnoremap <silent> <leader><ESC> :nohlsearch<CR>
 
 " Syntastic check/reset
-nnoremap <silent> <leader>sc :SyntasticCheck<CR>
-nnoremap <silent> <leader>sr :SyntasticReset<CR>
+nnoremap <silent> <F6> :SyntasticCheck<CR>
+nnoremap <silent> <F7> :SyntasticReset<CR>
 
 " Wrap a word in quotes
 nnoremap <silent> <leader>q' ciw'<C-R><C-O>"'<Esc>
@@ -228,6 +225,9 @@ vnoremap <silent> > >gv
 
 " Repeat over lines in Visual mode
 vnoremap <silent> . :normal .<CR>
+
+" Highlight text from last Insert mode
+nnoremap <silent> gV `[v`]
 
 " Find and run Vim commands
 nnoremap <silent> <C-K> :CtrlPCmdPalette<CR>
@@ -276,6 +276,7 @@ nnoremap <silent> <leader>? :call <SID>google_it(expand("<cWORD>"))<CR>
 
 " grep_buffers() {{{
 function! s:grep_buffers(word)
+    silent cclose
     silent cexpr []
     silent execute ':bufdo | try | vimgrepadd /' . a:word . '/j % | catch | endtry'
     silent cwindow
