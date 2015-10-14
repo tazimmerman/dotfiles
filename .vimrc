@@ -183,11 +183,11 @@ inoremap <silent> <C-J> <C-R>=pumvisible() ? "\<lt>C-N>" : "\<lt>C-J>"<CR>
 " Alias space to leader
 map <Space> <leader>
 
-" Erase trailing whitespace on any line
-nnoremap <silent> <leader><BS> :%s/\s\+$//g<CR>
+" Highlight word under cursor without jumping
+nnoremap <silent> * :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hlsearch<CR>
 
 " Reset search pattern
-nnoremap <silent> <leader><ESC> :nohlsearch<CR>
+nnoremap <silent> <C-_> :let @/=""<CR>
 
 " Syntastic check/reset
 nnoremap <silent> <F6> :SyntasticCheck<CR>
@@ -201,9 +201,6 @@ nnoremap <silent> <leader>q( ciw(<C-R><C-O>")<Esc>
 nnoremap <silent> <leader>q[ ciw[<C-R><C-O>"]<Esc>
 nnoremap <silent> <leader>q{ ciw{<C-R><C-O>"}<Esc>
 nnoremap <silent> <leader>q< ciw<<C-R><C-O>"><Esc>
-
-" Format a paragraph
-noremap <silent> <leader>gq gqap
 
 " Inverse of g]
 nnoremap <silent> g[ :pop<CR>
@@ -231,7 +228,6 @@ nnoremap <silent> gV `[v`]
 
 " Find and run Vim commands
 nnoremap <silent> <C-K> :CtrlPCmdPalette<CR>
-
 " }}}
 
 " get_visual_selection() {{{
