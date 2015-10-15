@@ -149,17 +149,13 @@ let g:ctrlp_cmdpalette_execute=1
 " }}}
 
 " Syntastic {{{
-let g:syntastic_javascript_checkers=['jshint']
-let g:syntastic_python_checkers=['pyflakes', 'pep8']
+let g:syntastic_aggregate_errors=1
+let g:syntastic_enable_signs=0
+let g:syntastic_enable_balloons=0
+let g:syntastic_enable_highlighting=0
 let g:syntastic_auto_loc_list=1
-let g:syntastic_enable_signs=has('gui')
-let g:syntastic_enable_highlighting=has('gui')
-let g:syntastic_enable_balloons=has('gui')
 let g:syntastic_mode_map={ 'mode': 'passive' }
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_style_error_symbol='✗'
-let g:syntastic_style_warning_symbol='⚠'
+let g:syntastic_python_checkers=['pyflakes', 'pep8']
 " }}}
 
 " Airline {{{
@@ -167,11 +163,16 @@ let g:airline_powerline_fonts=1
 let g:airline#extensions#wordcount#enabled=0
 let g:airline#extensions#whitespace#enabled=0
 let g:airline#extensions#tabline#enabled=0
+let g:airline#extensions#default#layout=[
+    \ ['a', 'c'],
+    \ ['x', 'z'],
+    \ ]
 " }}}
 
 " Tagbar {{{
 let g:tagbar_ctags_bin='~/.local/bin/ctags'
 let g:tagbar_compact=1
+let g:tagbar_iconchars=['+', '-']
 " }}}
 
 " Commands {{{
