@@ -118,12 +118,11 @@ call plug#begin('~/.vim/bundle')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fisadev/vim-ctrlp-cmdpalette'
 Plug 'scrooloose/syntastic'
+Plug 'majutsushi/tagbar'
 Plug 'hdima/python-syntax'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'bling/vim-airline'
-Plug 'chriskempson/base16-vim'
 Plug 'morhetz/gruvbox'
-Plug 'jiangmiao/auto-pairs'
 call plug#end()
 " }}}
 
@@ -137,12 +136,13 @@ endif
 " }}}
 
 " Ctrl-P {{{
-let g:ctrlp_clear_cache_on_exit=1
-let g:ctrlp_show_hidden=0
 let g:ctrlp_switch_buffer=1
 let g:ctrlp_match_window='max:10,results:100'
-let g:ctrlp_use_caching=1
 let g:ctrlp_root_markers=['cscope.out', 'tags']
+let g:ctrlp_use_caching=1
+let g:ctrlp_clear_cache_on_exit=1
+let g:ctrlp_show_hidden=0
+let g:ctrlp_lazy_update=1
 let g:ctrlp_extensions=['buffertag', 'bookmarkdir']
 let g:ctrlp_buftag_ctags_bin='~/.local/bin/ctags'
 let g:ctrlp_cmdpalette_execute=1
@@ -164,7 +164,14 @@ let g:syntastic_style_warning_symbol='⚠'
 
 " Airline {{{
 let g:airline_powerline_fonts=1
+let g:airline#extensions#wordcount#enabled=0
 let g:airline#extensions#whitespace#enabled=0
+let g:airline#extensions#tabline#enabled=0
+" }}}
+
+" Tagbar {{{
+let g:tagbar_ctags_bin='~/.local/bin/ctags'
+let g:tagbar_compact=1
 " }}}
 
 " Commands {{{
@@ -184,12 +191,16 @@ inoremap <silent> <C-J> <C-R>=pumvisible() ? "\<lt>C-N>" : "\<lt>C-J>"<CR>
 map <Space> <leader>
 
 " Highlight word under cursor without jumping
-nnoremap <silent> * :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hlsearch<CR>
+nnoremap <silent> <leader>* :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hlsearch<CR>
 
 " Reset search pattern
 nnoremap <silent> <C-_> :let @/=""<CR>
 
-" Syntastic check/reset
+" CtrlP shortcuts
+nnoremap <silent> <F2> :CtrlPBookmarkDir<CR>
+nnoremap <silent> <F3> :CtrlPBufTagAll<CR>
+
+" Syntastic shortcuts
 nnoremap <silent> <F6> :SyntasticCheck<CR>
 nnoremap <silent> <F7> :SyntasticReset<CR>
 
