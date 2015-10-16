@@ -177,10 +177,10 @@ let g:tagbar_iconchars=['+', '-']
 
 " Commands {{{
 " Jump to the next diff and obtain it (repeat with @@, followed by @:)
-command -nargs=0 Fix :normal! ]cdo<CR>
+command! -nargs=0 Fix :normal! ]cdo<CR>
 
 " Find TODO, XXX, etc.
-command -nargs=0 Todo :lvimgrep /\#\s*\(XXX\|TODO\|NOTE\)/ %<CR>
+command! -nargs=0 Todo :lvimgrep /\#\s*\(XXX\|TODO\|NOTE\)/ %<CR>
 " }}}
 
 " Mappings {{{
@@ -278,8 +278,8 @@ function! s:google_it(phrase)
                    \ 'g')
     call system(s:open_cmd . url . q)
 endfunction
-vnoremap <silent> <leader>? :call <SID>google_it(<SID>get_visual_selection())<CR>
-nnoremap <silent> <leader>? :call <SID>google_it(expand("<cWORD>"))<CR>
+vnoremap <silent> <leader>k :call <SID>google_it(<SID>get_visual_selection())<CR>
+nnoremap <silent> <leader>k :call <SID>google_it(expand("<cWORD>"))<CR>
 " }}}
 
 " grep_buffers() {{{
@@ -289,8 +289,8 @@ function! s:grep_buffers(word)
     silent execute ':bufdo | try | vimgrepadd /' . a:word . '/j % | catch | endtry'
     silent cwindow
 endfunction
-vnoremap <silent> <leader>/ :call <SID>grep_buffers(<SID>get_visual_selection())<CR>
-nnoremap <silent> <leader>/ :call <SID>grep_buffers(expand("<cWORD>"))<CR>
+vnoremap <silent> <leader>i :call <SID>grep_buffers(<SID>get_visual_selection())<CR>
+nnoremap <silent> <leader>i :call <SID>grep_buffers(expand("<cWORD>"))<CR>
 " }}}
 
 " Local {{{
