@@ -197,10 +197,6 @@ nnoremap <silent> <leader>* :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hl
 " Reset search pattern
 nnoremap <silent> <C-_> :let @/=""<CR>
 
-" CtrlP shortcuts
-nnoremap <silent> <F2> :CtrlPBookmarkDir<CR>
-nnoremap <silent> <F3> :CtrlPBufTagAll<CR>
-
 " Syntastic shortcuts
 nnoremap <silent> <F6> :SyntasticCheck<CR>
 nnoremap <silent> <F7> :SyntasticReset<CR>
