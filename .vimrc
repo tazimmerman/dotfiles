@@ -69,7 +69,6 @@ endif
 " }}}
 
 " UI {{{
-set background=dark
 set colorcolumn=+1
 set cursorline
 set laststatus=2
@@ -77,6 +76,8 @@ set lazyredraw
 set relativenumber
 set ruler
 set mousehide
+set splitbelow
+set splitright
 set winminheight=0
 set winminwidth=0
 
@@ -91,6 +92,7 @@ if has('gui_macvim')
 elseif has('gui_running')
     set guifont=Fantasque\ Sans\ Mono\ 12
 else
+    set ttyfast
     set t_Co=256
 endif
 " }}}
@@ -122,16 +124,18 @@ Plug 'majutsushi/tagbar'
 Plug 'hdima/python-syntax'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'bling/vim-airline'
-Plug 'morhetz/gruvbox'
+Plug 'jonathanfilip/vim-lucius'
+Plug 'wellle/targets.vim'
 call plug#end()
 " }}}
 
 " Colors {{{
-let g:gruvbox_italic=1
 if has('gui_running')
-    colorscheme gruvbox
+    set background=light
+    colorscheme lucius
 else
-    colorscheme gruvbox
+    set background=dark
+    colorscheme lucius
 endif
 " }}}
 
