@@ -126,6 +126,7 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'bling/vim-airline'
 Plug 'jonathanfilip/vim-lucius'
 Plug 'wellle/targets.vim'
+Plug 'unblevable/quick-scope'
 call plug#end()
 " }}}
 
