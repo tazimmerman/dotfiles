@@ -17,9 +17,13 @@ set tags=./tags;
 " }}}
 
 " Grep {{{
-if has('unix') && executable('ack')
-    set grepprg=ack\ -s\ --with-filename\ --nocolor\ --nogroup\ --column
-    set grepformat=%f:%l:%c:%m
+if has('unix')
+    if executable('ag')
+        set grepprg=ag\ --nogroup\ --nocolor\ --vimgrep
+    elseif executable('ack')
+        set grepprg=ack\ -s\ --with-filename\ --nocolor\ --nogroup\ --column
+    endif
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 " }}}
 
@@ -118,7 +122,6 @@ syntax sync fromstart
 " Plug-ins {{{
 call plug#begin('~/.vim/bundle')
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'fisadev/vim-ctrlp-cmdpalette'
 Plug 'scrooloose/syntastic'
 Plug 'majutsushi/tagbar'
 Plug 'hdima/python-syntax'
@@ -126,7 +129,6 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'bling/vim-airline'
 Plug 'jonathanfilip/vim-lucius'
 Plug 'wellle/targets.vim'
-Plug 'unblevable/quick-scope'
 call plug#end()
 " }}}
 
@@ -200,7 +202,10 @@ map <Space> <leader>
 nnoremap <silent> <leader>* :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hlsearch<CR>
 
 " Reset search pattern
-nnoremap <silent> <C-_> :let @/=""<CR>
+nnoremap <silent> <ESC> :let @/=""<CR>
+
+" CtrlP shortcuts
+nnoremap <silent> <C-K> :CtrlPBookmarkDir<CR>
 
 " Syntastic shortcuts
 nnoremap <silent> <F6> :SyntasticCheck<CR>
@@ -238,9 +243,6 @@ vnoremap <silent> . :normal .<CR>
 
 " Highlight text from last Insert mode
 nnoremap <silent> gV `[v`]
-
-" Find and run Vim commands
-nnoremap <silent> <C-K> :CtrlPCmdPalette<CR>
 " }}}
 
 " get_visual_selection() {{{
