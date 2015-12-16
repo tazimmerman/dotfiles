@@ -1,6 +1,7 @@
 " General {{{
 set backspace=start,indent,eol
 set browsedir=buffer
+set cryptmethod=blowfish2
 set encoding=utf-8
 set fillchars= 
 set formatoptions=tcrqn
