@@ -150,12 +150,12 @@ let g:ctrlp_switch_buffer=1
 let g:ctrlp_match_window='max:10,results:100'
 let g:ctrlp_root_markers=['cscope.out', 'tags']
 let g:ctrlp_use_caching=1
-let g:ctrlp_clear_cache_on_exit=1
 let g:ctrlp_show_hidden=0
 let g:ctrlp_lazy_update=1
 let g:ctrlp_extensions=['buffertag', 'bookmarkdir']
 let g:ctrlp_buftag_ctags_bin='~/.local/bin/ctags'
 let g:ctrlp_cmdpalette_execute=1
+let g:ctrlp_max_depth=5
 " }}}
 
 " Syntastic {{{
