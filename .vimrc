@@ -127,9 +127,11 @@ Plug 'scrooloose/syntastic'
 Plug 'majutsushi/tagbar'
 Plug 'hdima/python-syntax'
 Plug 'hynek/vim-python-pep8-indent'
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'jonathanfilip/vim-lucius'
 Plug 'wellle/targets.vim'
+Plug 'ervandew/supertab'
 call plug#end()
 " }}}
 
@@ -157,6 +159,7 @@ let g:ctrlp_cmdpalette_execute=1
 " }}}
 
 " Syntastic {{{
+let g:syntastic_aggregate_errors=0
 let g:syntastic_enable_signs=0
 let g:syntastic_enable_balloons=0
 let g:syntastic_enable_highlighting=0
@@ -254,20 +257,6 @@ function! s:get_visual_selection()
     let lines[0] = lines[0][begcol - 1:]
     return join(lines, "\n")
 endfunction
-" }}}
-
-" tab_complete() {{{
-function! s:tab_complete()
-    if pumvisible()
-        return "\<C-P>"
-    endif
-    if strpart(getline('.'), 0, col('.')-1) =~ '^\s*$'
-        return "\<Tab>"
-    else
-        return "\<C-P>"
-    endif
-endfunction
-inoremap <silent> <Tab> <C-R>=<SID>tab_complete()<CR>
 " }}}
 
 " google_it() {{{
