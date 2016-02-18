@@ -131,6 +131,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jonathanfilip/vim-lucius'
 Plug 'wellle/targets.vim'
+Plug 'chaoren/vim-wordmotion'
 Plug 'ervandew/supertab'
 call plug#end()
 " }}}
