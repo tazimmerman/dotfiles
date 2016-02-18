@@ -147,26 +147,27 @@ endif
 " }}}
 
 " Ctrl-P {{{
-let g:ctrlp_switch_buffer=1
 let g:ctrlp_match_window='max:10,results:100'
 let g:ctrlp_root_markers=['cscope.out', 'tags']
 let g:ctrlp_use_caching=1
-let g:ctrlp_show_hidden=0
+let g:ctrlp_clear_cache_on_exit=0
+let g:ctrlp_max_depth=5
 let g:ctrlp_lazy_update=1
 let g:ctrlp_extensions=['buffertag', 'bookmarkdir']
 let g:ctrlp_buftag_ctags_bin='~/.local/bin/ctags'
-let g:ctrlp_cmdpalette_execute=1
-let g:ctrlp_max_depth=5
 " }}}
 
 " Syntastic {{{
-let g:syntastic_aggregate_errors=0
-let g:syntastic_enable_signs=0
-let g:syntastic_enable_balloons=0
-let g:syntastic_enable_highlighting=0
+let g:syntastic_enable_signs=has('gui')
+let g:syntastic_enable_balloons=has('gui')
+let g:syntastic_enable_highlighting=has('gui')
 let g:syntastic_auto_loc_list=1
 let g:syntastic_mode_map={ 'mode': 'passive' }
 let g:syntastic_python_checkers=['pyflakes', 'pep8']
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_style_error_symbol='✗'
+let g:syntastic_style_warning_symbol='⚠'
 " }}}
 
 " Airline {{{
