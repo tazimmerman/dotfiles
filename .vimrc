@@ -187,6 +187,10 @@ let g:tagbar_compact=1
 let g:tagbar_iconchars=['+', '-']
 " }}}
 
+" Word Motion {{{
+let g:wordmotion_prefix='<leader>'
+" }}}
+
 " Commands {{{
 " Jump to the next diff and obtain it (repeat with @@, followed by @:)
 command! -nargs=0 Fix :normal! ]cdo<CR>
