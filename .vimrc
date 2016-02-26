@@ -42,6 +42,7 @@ set wildmenu
 set wildmode=list:longest,full
 set complete=.,w,b
 set completeopt=menu
+set pumheight=15
 " }}}
 
 " Wild Ignore {{{
@@ -124,25 +125,25 @@ syntax sync fromstart
 call plug#begin('~/.vim/bundle')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/syntastic'
-Plug 'majutsushi/tagbar'
 Plug 'hdima/python-syntax'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jonathanfilip/vim-lucius'
+Plug 'morhetz/gruvbox'
 Plug 'wellle/targets.vim'
 Plug 'chaoren/vim-wordmotion'
-Plug 'ervandew/supertab'
 call plug#end()
 " }}}
 
 " Colors {{{
+let g:gruvbox_italic=1
 if has('gui_running')
-    set background=light
-    colorscheme lucius
+    set background=dark
+    colorscheme gruvbox
 else
     set background=dark
-    colorscheme lucius
+    colorscheme gruvbox
 endif
 " }}}
 
@@ -179,12 +180,6 @@ let g:airline#extensions#default#layout=[
     \ ['a', 'c'],
     \ ['x', 'z'],
     \ ]
-" }}}
-
-" Tagbar {{{
-let g:tagbar_ctags_bin='~/.local/bin/ctags'
-let g:tagbar_compact=1
-let g:tagbar_iconchars=['+', '-']
 " }}}
 
 " Word Motion {{{
