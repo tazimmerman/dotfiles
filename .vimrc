@@ -139,8 +139,8 @@ call plug#end()
 " Colors {{{
 let g:gruvbox_italic=1
 if has('gui_running')
-    set background=dark
-    colorscheme gruvbox
+    set background=light
+    colorscheme lucius
 else
     set background=dark
     colorscheme gruvbox
@@ -258,6 +258,20 @@ function! s:get_visual_selection()
     let lines[0] = lines[0][begcol - 1:]
     return join(lines, "\n")
 endfunction
+" }}}
+
+" tab_complete() {{{
+function! s:tab_complete(mode)
+    let cmd=(a:mode == "P" ? "\<C-P>" : "\<C-N>")
+    let bol=(strpart(getline('.'), 0, col('.')-1) =~ '^\s*$' ? 1 : 0)
+    if bol == 0 || pumvisible()
+        return cmd
+    else
+        return "\<Tab>"
+    endif
+endfunction
+inoremap <silent> <Tab> <C-R>=<SID>tab_complete("P")<CR>
+inoremap <silent> <S-Tab> <C-R>=<SID>tab_complete("N")<CR>
 " }}}
 
 " google_it() {{{
