@@ -133,6 +133,7 @@ Plug 'jonathanfilip/vim-lucius'
 Plug 'morhetz/gruvbox'
 Plug 'wellle/targets.vim'
 Plug 'chaoren/vim-wordmotion'
+Plug 'tpope/vim-commentary'
 call plug#end()
 " }}}
 
