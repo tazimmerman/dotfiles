@@ -40,7 +40,8 @@ set nowrapscan
 " Completion {{{
 set wildignorecase
 set wildmenu
-set wildmode=list:longest,full
+set wildmode=longest:full,full
+set wildoptions=tagfile
 set complete=.,w,b
 set completeopt=menu
 set pumheight=15
@@ -124,7 +125,6 @@ syntax sync fromstart
 
 " Plug-ins {{{
 call plug#begin('~/.vim/bundle')
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/syntastic'
 Plug 'hdima/python-syntax'
 Plug 'hynek/vim-python-pep8-indent'
@@ -147,17 +147,6 @@ else
     set background=dark
     colorscheme gruvbox
 endif
-" }}}
-
-" Ctrl-P {{{
-let g:ctrlp_match_window='max:10,results:100'
-let g:ctrlp_root_markers=['cscope.out', 'tags']
-let g:ctrlp_use_caching=1
-let g:ctrlp_clear_cache_on_exit=0
-let g:ctrlp_max_depth=5
-let g:ctrlp_lazy_update=1
-let g:ctrlp_extensions=['buffertag', 'bookmarkdir']
-let g:ctrlp_buftag_ctags_bin='~/.local/bin/ctags'
 " }}}
 
 " Syntastic {{{
