@@ -1,4 +1,5 @@
 " General {{{
+set autoread
 set backspace=start,indent,eol
 set browsedir=buffer
 set cryptmethod=blowfish2
@@ -79,8 +80,8 @@ endif
 " UI {{{
 set colorcolumn=+1
 set cursorline
+set display=lastline
 set laststatus=2
-set lazyredraw
 set relativenumber
 set ruler
 set mousehide
@@ -100,8 +101,8 @@ if has('gui_macvim')
 elseif has('gui_running')
     set guifont=Fantasque\ Sans\ Mono\ 12
 else
+    set lazyredraw
     set ttyfast
-    set t_Co=256
 endif
 " }}}
 
@@ -124,18 +125,16 @@ syntax sync fromstart
 " }}}
 
 " Plug-ins {{{
-call plug#begin('~/.vim/bundle')
-Plug 'scrooloose/syntastic'
-Plug 'hdima/python-syntax'
-Plug 'hynek/vim-python-pep8-indent'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'jonathanfilip/vim-lucius'
-Plug 'morhetz/gruvbox'
-Plug 'wellle/targets.vim'
-Plug 'chaoren/vim-wordmotion'
-Plug 'tpope/vim-commentary'
-call plug#end()
+packadd! syntastic
+packadd! python-syntax
+packadd! vim-python-pep8-indent
+packadd! vim-airline
+packadd! vim-airline-themes
+packadd! vim-lucius
+packadd! gruvbox
+packadd! targets.vim
+packadd! vim-wordmotion
+packadd! vim-commentary
 " }}}
 
 " Colors {{{
@@ -196,11 +195,12 @@ map <Space> <leader>
 " Highlight word under cursor without jumping
 nnoremap <silent> <leader>* :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hlsearch<CR>
 
+" Change next/previous occurrence
+nnoremap <silent> c; *``cgn
+nnoremap <silent> c, #``cgn
+
 " Reset search pattern
 nnoremap <silent> <ESC> :let @/=""<CR>
-
-" CtrlP shortcuts
-nnoremap <silent> <C-K> :CtrlPBookmarkDir<CR>
 
 " Syntastic shortcuts
 nnoremap <silent> <F6> :SyntasticCheck<CR>
@@ -218,8 +218,8 @@ nnoremap <silent> <leader>q< ciw<<C-R><C-O>"><Esc>
 " Inverse of g]
 nnoremap <silent> g[ :pop<CR>
 
-" Preview tag on Enter
-nnoremap <silent> <leader><CR> :ptjump <C-R>=expand("<cword>")<CR><CR>
+" Preview tag
+nnoremap <silent> <leader>k :ptjump <C-R>=expand("<cword>")<CR><CR>
 
 " Move lines with indent
 nnoremap <silent> <Up> :move-2<CR>==
