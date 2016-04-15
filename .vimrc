@@ -219,7 +219,7 @@ nnoremap <silent> <leader>q< ciw<<C-R><C-O>"><Esc>
 nnoremap <silent> g[ :pop<CR>
 
 " Preview tag
-nnoremap <silent> <leader>k :ptjump <C-R>=expand("<cword>")<CR><CR>
+nnoremap <silent> <leader>p :ptjump <C-R>=expand("<cword>")<CR><CR>
 
 " Move lines with indent
 nnoremap <silent> <Up> :move-2<CR>==
