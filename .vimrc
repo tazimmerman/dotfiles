@@ -101,6 +101,9 @@ if has('gui_macvim')
 elseif has('gui_running')
     set guifont=Fantasque\ Sans\ Mono\ 12
 else
+    set t_8f=[38;2;%lu;%lu;%lum
+    set t_8b=[48;2;%lu;%lu;%lum
+    set guicolors
     set lazyredraw
     set ttyfast
 endif
