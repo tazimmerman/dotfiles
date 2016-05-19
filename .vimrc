@@ -135,6 +135,8 @@ packadd! lightline.vim
 packadd! targets.vim
 packadd! vim-wordmotion
 packadd! vim-commentary
+packadd! vim-repeat
+packadd! vim-surround
 packadd! base16-vim
 packadd! probe
 " }}}
