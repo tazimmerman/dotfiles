@@ -103,7 +103,7 @@ elseif has('gui_running')
 else
     set t_8f=[38;2;%lu;%lu;%lum
     set t_8b=[48;2;%lu;%lu;%lum
-    set guicolors
+    set termguicolors
     set lazyredraw
     set ttyfast
 endif
@@ -131,23 +131,22 @@ syntax sync fromstart
 packadd! syntastic
 packadd! python-syntax
 packadd! vim-python-pep8-indent
-packadd! vim-airline
-packadd! vim-airline-themes
-packadd! vim-lucius
-packadd! gruvbox
+packadd! lightline.vim
 packadd! targets.vim
 packadd! vim-wordmotion
 packadd! vim-commentary
+packadd! base16-vim
+packadd! probe
 " }}}
 
 " Colors {{{
 let g:gruvbox_italic=1
 if has('gui_running')
-    set background=light
-    colorscheme lucius
+    set background=dark
+    colorscheme base16-monokai
 else
     set background=dark
-    colorscheme gruvbox
+    colorscheme base16-monokai
 endif
 " }}}
 
@@ -164,19 +163,20 @@ let g:syntastic_style_error_symbol='✗'
 let g:syntastic_style_warning_symbol='⚠'
 " }}}
 
-" Airline {{{
-let g:airline_powerline_fonts=1
-let g:airline#extensions#wordcount#enabled=0
-let g:airline#extensions#whitespace#enabled=0
-let g:airline#extensions#tabline#enabled=0
-let g:airline#extensions#default#layout=[
-    \ ['a', 'c'],
-    \ ['x', 'z'],
-    \ ]
+" Lightline {{{
+let g:lightline={}
+let g:lightline.component={
+    \ 'modified': "%{&modified ? '✎' : ''}",
+    \ 'readonly': "%{&readonly ? '' : ''}",
+    \ }
 " }}}
 
 " Word Motion {{{
 let g:wordmotion_prefix='<leader>'
+" }}}
+
+" Probe {{{
+let g:probe_use_wildignore=1
 " }}}
 
 " Commands {{{
@@ -206,8 +206,13 @@ nnoremap <silent> c, #``cgn
 nnoremap <silent> <ESC> :let @/=""<CR>
 
 " Syntastic shortcuts
-nnoremap <silent> <F6> :SyntasticCheck<CR>
-nnoremap <silent> <F7> :SyntasticReset<CR>
+nnoremap <silent> <leader>s :SyntasticCheck<CR>
+nnoremap <silent> <leader><S-s> :SyntasticReset<CR>
+
+" Probe shortcuts
+nnoremap <silent> <leader>f :ProbeFindInRepo<CR>
+nnoremap <silent> <leader><S-f> :ProbeFindFile<CR>
+nnoremap <silent> <leader><C-f> :ProbeFindBuffer<CR>
 
 " Wrap a word in quotes
 nnoremap <silent> <leader>q' ciw'<C-R><C-O>"'<Esc>
@@ -241,6 +246,11 @@ vnoremap <silent> . :normal .<CR>
 
 " Highlight text from last Insert mode
 nnoremap <silent> gV `[v`]
+
+" Add relative line motions to jump list
+nnoremap <silent> <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
+nnoremap <silent> <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
+
 " }}}
 
 " get_visual_selection() {{{
