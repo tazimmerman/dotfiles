@@ -195,7 +195,10 @@ command! -nargs=0 Fix :normal! ]cdo<CR>
 command! -nargs=0 Todo :lvimgrep /\#\s*\(XXX\|TODO\|NOTE\)/ %<CR>
 
 " Avoid the 'Hit ENTER to continue' prompts
-command! -nargs=0 Make silent! make | redraw!
+command! -nargs=* -complete=file_in_path Grep silent! grep! <args> | redraw!
+command! -nargs=* -complete=file_in_path LGrep silent! lgrep! <args> | redraw!
+command! -nargs=0 Make silent! make! | redraw!
+command! -nargs=0 LMake silent! lmake! | redraw!
 
 " }}}
 
