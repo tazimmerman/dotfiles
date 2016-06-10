@@ -21,7 +21,7 @@ set tags=./tags;
 " Grep {{{
 if has('unix')
     if executable('ag')
-        set grepprg=ag\ --nogroup\ --nocolor\ --vimgrep
+        set grepprg=ag\ --nogroup\ --nocolor\ --column\ --vimgrep
     elseif executable('ack')
         set grepprg=ack\ -s\ --with-filename\ --nocolor\ --nogroup\ --column
     endif
@@ -117,6 +117,12 @@ augroup CursorLine
     autocmd InsertEnter * set nocursorline
     autocmd InsertLeave * set cursorline
 augroup end
+
+augroup QuickFix
+    autocmd!
+    autocmd QuickFixCmdPost [^l]* nested cwindow
+    autocmd QuickFixCmdPost    l* nested lwindow
+augroup end
 " }}}
 
 " Syntax, Filetype {{{
@@ -142,7 +148,6 @@ packadd! probe
 " }}}
 
 " Colors {{{
-let g:gruvbox_italic=1
 if has('gui_running')
     set background=dark
     colorscheme base16-monokai
@@ -178,6 +183,7 @@ let g:wordmotion_prefix='<leader>'
 " }}}
 
 " Probe {{{
+let g:probe_use_gitignore=1
 let g:probe_use_wildignore=1
 " }}}
 
@@ -187,6 +193,10 @@ command! -nargs=0 Fix :normal! ]cdo<CR>
 
 " Find TODO, XXX, etc.
 command! -nargs=0 Todo :lvimgrep /\#\s*\(XXX\|TODO\|NOTE\)/ %<CR>
+
+" Avoid the 'Hit ENTER to continue' prompts
+command! -nargs=0 Make silent! make | redraw!
+
 " }}}
 
 " Mappings {{{
@@ -295,20 +305,10 @@ vnoremap <silent> <leader>k :call <SID>google_it(<SID>get_visual_selection())<CR
 nnoremap <silent> <leader>k :call <SID>google_it(expand("<cWORD>"))<CR>
 " }}}
 
-" grep_buffers() {{{
-function! s:grep_buffers(word)
-    silent cclose
-    silent cexpr []
-    silent execute ':bufdo | try | vimgrepadd /' . a:word . '/j % | catch | endtry'
-    silent cwindow
-endfunction
-vnoremap <silent> <leader>i :call <SID>grep_buffers(<SID>get_visual_selection())<CR>
-nnoremap <silent> <leader>i :call <SID>grep_buffers(expand("<cWORD>"))<CR>
-" }}}
-
 " Local {{{
-if filereadable(glob('~/.vimrc.local'))
-    source ~/.vimrc.local
+let localrc=glob('~/.vimrc.local')
+if filereadable(localrc)
+    exec 'source' localrc
 endif
 " }}}
 
