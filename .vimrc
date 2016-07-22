@@ -138,22 +138,26 @@ packadd! syntastic
 packadd! python-syntax
 packadd! vim-python-pep8-indent
 packadd! lightline.vim
+packadd! lightline-gruvbox.vim
 packadd! targets.vim
 packadd! vim-wordmotion
 packadd! vim-commentary
 packadd! vim-repeat
 packadd! vim-surround
 packadd! base16-vim
+packadd! gruvbox
 packadd! probe
+packadd! hasksyn
+packadd! vim-gitgutter
 " }}}
 
 " Colors {{{
 if has('gui_running')
     set background=dark
-    colorscheme base16-monokai
+    colorscheme gruvbox
 else
     set background=dark
-    colorscheme base16-monokai
+    colorscheme gruvbox
 endif
 " }}}
 
@@ -163,7 +167,7 @@ let g:syntastic_enable_balloons=has('gui')
 let g:syntastic_enable_highlighting=has('gui')
 let g:syntastic_auto_loc_list=1
 let g:syntastic_mode_map={ 'mode': 'passive' }
-let g:syntastic_python_checkers=['pyflakes', 'pep8']
+let g:syntastic_python_checkers=['pyflakes', 'pycodestyle']
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 let g:syntastic_style_error_symbol='✗'
@@ -172,6 +176,7 @@ let g:syntastic_style_warning_symbol='⚠'
 
 " Lightline {{{
 let g:lightline={}
+let g:lightline.colorscheme='gruvbox'
 let g:lightline.component={
     \ 'modified': "%{&modified ? '✎' : ''}",
     \ 'readonly': "%{&readonly ? '' : ''}",
@@ -185,6 +190,19 @@ let g:wordmotion_prefix='<leader>'
 " Probe {{{
 let g:probe_use_gitignore=1
 let g:probe_use_wildignore=1
+" }}}
+
+" Git Gutter {{{
+let g:gitgutter_realtime=0
+let g:gitgutter_map_keys=0
+nmap <leader>h <Plug>GitGutterStageHunk
+nmap <leader>H <Plug>GitGutterUndoHunk
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+omap ih <Plug>GitGutterTextObjectInnerPending
+omap ah <Plug>GitGutterTextObjectOuterPending
+xmap ih <Plug>GitGutterTextObjectInnerVisual
+xmap ah <Plug>GitGutterTextObjectOuterVisual
 " }}}
 
 " Commands {{{
