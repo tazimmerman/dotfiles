@@ -5,7 +5,7 @@ set browsedir=buffer
 set cryptmethod=blowfish2
 set encoding=utf-8
 set fillchars= 
-set formatoptions=tcrqn
+set formatoptions=tcroqnlj
 set hidden
 set list
 set listchars=tab:\|\ ,extends:>,precedes:<
@@ -195,6 +195,7 @@ let g:probe_use_wildignore=1
 " Git Gutter {{{
 let g:gitgutter_realtime=0
 let g:gitgutter_map_keys=0
+let g:gitgutter_sign_column_always=1
 nmap <leader>h <Plug>GitGutterStageHunk
 nmap <leader>H <Plug>GitGutterUndoHunk
 nmap ]h <Plug>GitGutterNextHunk
