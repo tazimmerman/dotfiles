@@ -16,6 +16,7 @@ set scrolloff=5
 set showmatch
 set switchbuf=usetab
 set tags=./tags;
+set virtualedit=block
 " }}}
 
 " Grep {{{
@@ -82,6 +83,7 @@ set colorcolumn=+1
 set cursorline
 set display=lastline
 set laststatus=2
+set number
 set relativenumber
 set ruler
 set mousehide
@@ -154,7 +156,7 @@ packadd! vim-gitgutter
 " Colors {{{
 if has('gui_running')
     set background=dark
-    colorscheme gruvbox
+    colorscheme base16-monokai
 else
     set background=dark
     colorscheme gruvbox
@@ -162,9 +164,9 @@ endif
 " }}}
 
 " Syntastic {{{
-let g:syntastic_enable_signs=has('gui')
-let g:syntastic_enable_balloons=has('gui')
-let g:syntastic_enable_highlighting=has('gui')
+let g:syntastic_enable_signs=1
+let g:syntastic_enable_balloons=1
+let g:syntastic_enable_highlighting=1
 let g:syntastic_auto_loc_list=1
 let g:syntastic_mode_map={ 'mode': 'passive' }
 let g:syntastic_python_checkers=['pyflakes', 'pycodestyle']
@@ -176,7 +178,7 @@ let g:syntastic_style_warning_symbol='⚠'
 
 " Lightline {{{
 let g:lightline={}
-let g:lightline.colorscheme='gruvbox'
+let g:lightline.colorscheme=has('gui_running') ? 'powerline' : 'gruvbox'
 let g:lightline.component={
     \ 'modified': "%{&modified ? '✎' : ''}",
     \ 'readonly': "%{&readonly ? '' : ''}",
@@ -213,12 +215,14 @@ command! -nargs=0 Fix :normal! ]cdo<CR>
 " Find TODO, XXX, etc.
 command! -nargs=0 Todo :lvimgrep /\#\s*\(XXX\|TODO\|NOTE\)/ %<CR>
 
+" Find conflict markers
+command! -nargs=0 Conficts :lvimgrep />>>>>>>\|=======\|<<<<<<</ %<CR>
+
 " Avoid the 'Hit ENTER to continue' prompts
 command! -nargs=* -complete=file_in_path Grep silent! grep! <args> | redraw!
 command! -nargs=* -complete=file_in_path LGrep silent! lgrep! <args> | redraw!
 command! -nargs=0 Make silent! make! | redraw!
 command! -nargs=0 LMake silent! lmake! | redraw!
-
 " }}}
 
 " Mappings {{{
@@ -245,8 +249,6 @@ nnoremap <silent> <leader><S-s> :SyntasticReset<CR>
 
 " Probe shortcuts
 nnoremap <silent> <leader>f :ProbeFindInRepo<CR>
-nnoremap <silent> <leader><S-f> :ProbeFindFile<CR>
-nnoremap <silent> <leader><C-f> :ProbeFindBuffer<CR>
 
 " Wrap a word in quotes
 nnoremap <silent> <leader>q' ciw'<C-R><C-O>"'<Esc>
