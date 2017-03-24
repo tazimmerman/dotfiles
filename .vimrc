@@ -151,6 +151,7 @@ packadd! gruvbox
 packadd! probe
 packadd! hasksyn
 packadd! vim-gitgutter
+packadd! ale
 " }}}
 
 " Colors {{{
@@ -192,20 +193,21 @@ let g:wordmotion_prefix='<leader>'
 " Probe {{{
 let g:probe_use_gitignore=1
 let g:probe_use_wildignore=1
+let g:probe_mappings={'select_next': '<c-j>', 'select_prev': '<c-k>'}
 " }}}
 
 " Git Gutter {{{
 let g:gitgutter_realtime=0
 let g:gitgutter_map_keys=0
 let g:gitgutter_sign_column_always=1
-nmap <leader>h <Plug>GitGutterStageHunk
-nmap <leader>H <Plug>GitGutterUndoHunk
-nmap ]h <Plug>GitGutterNextHunk
-nmap [h <Plug>GitGutterPrevHunk
-omap ih <Plug>GitGutterTextObjectInnerPending
-omap ah <Plug>GitGutterTextObjectOuterPending
-xmap ih <Plug>GitGutterTextObjectInnerVisual
-xmap ah <Plug>GitGutterTextObjectOuterVisual
+" }}}
+
+" ALE {{{
+let g:ale_lint_on_enter=0
+let g:ale_set_signs=0
+let g:ale_linters={
+    \ 'python': ['flake8']
+    \ }
 " }}}
 
 " Commands {{{
@@ -249,6 +251,22 @@ nnoremap <silent> <leader><S-s> :SyntasticReset<CR>
 
 " Probe shortcuts
 nnoremap <silent> <leader>f :ProbeFindInRepo<CR>
+nnoremap <silent> <leader>F :ProbeFindBuffer<CR>
+
+" Git Gutter shortcuts
+nmap <silent> <leader>h <Plug>GitGutterStageHunk
+nmap <silent> <leader>H <Plug>GitGutterUndoHunk
+nmap <silent> ]h <Plug>GitGutterNextHunk
+nmap <silent> [h <Plug>GitGutterPrevHunk
+nmap <silent> ih <Plug>GitGutterTextObjectInnerPending
+nmap <silent> ah <Plug>GitGutterTextObjectOuterPending
+nmap <silent> ih <Plug>GitGutterTextObjectInnerVisual
+nmap <silent> ah <Plug>GitGutterTextObjectOuterVisual
+
+" ALE shortcuts
+nmap <silent> ]l <Plug>(ale_next)
+nmap <silent> [l <Plug>(ale_previous)
+nmap <silent> <leader>l <Plug>(ale_lint)
 
 " Wrap a word in quotes
 nnoremap <silent> <leader>q' ciw'<C-R><C-O>"'<Esc>
