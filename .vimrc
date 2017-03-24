@@ -136,7 +136,6 @@ syntax sync fromstart
 " }}}
 
 " Plug-ins {{{
-packadd! syntastic
 packadd! python-syntax
 packadd! vim-python-pep8-indent
 packadd! lightline.vim
@@ -162,19 +161,6 @@ else
     set background=dark
     colorscheme gruvbox
 endif
-" }}}
-
-" Syntastic {{{
-let g:syntastic_enable_signs=1
-let g:syntastic_enable_balloons=1
-let g:syntastic_enable_highlighting=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_mode_map={ 'mode': 'passive' }
-let g:syntastic_python_checkers=['pyflakes', 'pycodestyle']
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_style_error_symbol='✗'
-let g:syntastic_style_warning_symbol='⚠'
 " }}}
 
 " Lightline {{{
@@ -244,10 +230,6 @@ nnoremap <silent> c, #``cgn
 
 " Reset search pattern
 nnoremap <silent> <ESC> :let @/=""<CR>
-
-" Syntastic shortcuts
-nnoremap <silent> <leader>s :SyntasticCheck<CR>
-nnoremap <silent> <leader><S-s> :SyntasticReset<CR>
 
 " Probe shortcuts
 nnoremap <silent> <leader>f :ProbeFindInRepo<CR>
