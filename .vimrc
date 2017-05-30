@@ -142,11 +142,13 @@ packadd! lightline.vim
 packadd! lightline-gruvbox.vim
 packadd! targets.vim
 packadd! vim-wordmotion
+packadd! vim-abolish
 packadd! vim-commentary
 packadd! vim-repeat
 packadd! vim-surround
 packadd! base16-vim
 packadd! gruvbox
+packadd! papercolor-theme
 packadd! probe
 packadd! hasksyn
 packadd! vim-gitgutter
@@ -161,6 +163,16 @@ else
     set background=dark
     colorscheme gruvbox
 endif
+" }}}
+
+" PaperColor {{{
+let g:PaperColor_Theme_Options={
+    \   'language': {
+    \     'python': {
+    \       'highlight_builtins': 1
+    \     }
+    \   }
+    \ }
 " }}}
 
 " Lightline {{{
@@ -190,10 +202,14 @@ let g:gitgutter_sign_column_always=1
 
 " ALE {{{
 let g:ale_lint_on_enter=0
+let g:ale_lint_on_text_changed='never'
+let g:ale_lint_on_insert_leave=1
+let g:ale_set_highlights=0
 let g:ale_set_signs=0
 let g:ale_linters={
     \ 'python': ['flake8']
     \ }
+let g:ale_python_flake8_args='--ignore=E501,W291' " line too long, trailing whitespace
 " }}}
 
 " Commands {{{
@@ -204,7 +220,7 @@ command! -nargs=0 Fix :normal! ]cdo<CR>
 command! -nargs=0 Todo :lvimgrep /\#\s*\(XXX\|TODO\|NOTE\)/ %<CR>
 
 " Find conflict markers
-command! -nargs=0 Conficts :lvimgrep />>>>>>>\|=======\|<<<<<<</ %<CR>
+command! -nargs=0 Conflicts :lvimgrep />>>>>>>\|=======\|<<<<<<</ %<CR>
 
 " Avoid the 'Hit ENTER to continue' prompts
 command! -nargs=* -complete=file_in_path Grep silent! grep! <args> | redraw!
@@ -327,6 +343,17 @@ function! s:google_it(phrase)
 endfunction
 vnoremap <silent> <leader>k :call <SID>google_it(<SID>get_visual_selection())<CR>
 nnoremap <silent> <leader>k :call <SID>google_it(expand("<cWORD>"))<CR>
+" }}}
+
+" pack_tags() {{{
+function! s:pack_tags()
+    for entry in expand(glob('~/.vim').'**/doc', 0, 1)
+        if isdirectory(entry)
+            exec 'helptags' entry
+        endif
+    endfor
+endfunction
+command! -nargs=0 HelpTags :call <SID>pack_tags()
 " }}}
 
 " Local {{{
