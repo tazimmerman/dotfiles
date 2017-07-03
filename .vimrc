@@ -79,14 +79,17 @@ endif
 " }}}
 
 " UI {{{
+set breakindent
 set colorcolumn=+1
 set cursorline
 set display=lastline
 set laststatus=2
+set linebreak
 set number
 set relativenumber
 set ruler
 set mousehide
+set showbreak=\ \ >\  
 set splitbelow
 set splitright
 set winminheight=0
@@ -136,33 +139,28 @@ syntax sync fromstart
 " }}}
 
 " Plug-ins {{{
-packadd! python-syntax
-packadd! vim-python-pep8-indent
-packadd! lightline.vim
-packadd! lightline-gruvbox.vim
-packadd! targets.vim
-packadd! vim-wordmotion
-packadd! vim-abolish
-packadd! vim-commentary
-packadd! vim-repeat
-packadd! vim-surround
+packadd! Alduin
+packadd! Despacio
+packadd! Sierra
 packadd! base16-vim
 packadd! gruvbox
 packadd! papercolor-theme
-packadd! probe
-packadd! hasksyn
-packadd! vim-gitgutter
-packadd! ale
-" }}}
+packadd! vim-airline
+packadd! vim-airline-themes
 
-" Colors {{{
-if has('gui_running')
-    set background=dark
-    colorscheme base16-monokai
-else
-    set background=dark
-    colorscheme gruvbox
-endif
+packadd! ale
+packadd! probe
+packadd! targets.vim
+packadd! vim-abolish
+packadd! vim-commentary
+packadd! vim-gitgutter
+packadd! vim-grepper
+packadd! vim-repeat
+packadd! vim-surround
+packadd! vim-wordmotion
+
+packadd! python-syntax
+packadd! vim-python-pep8-indent
 " }}}
 
 " PaperColor {{{
@@ -175,13 +173,25 @@ let g:PaperColor_Theme_Options={
     \ }
 " }}}
 
-" Lightline {{{
-let g:lightline={}
-let g:lightline.colorscheme=has('gui_running') ? 'powerline' : 'gruvbox'
-let g:lightline.component={
-    \ 'modified': "%{&modified ? '✎' : ''}",
-    \ 'readonly': "%{&readonly ? '' : ''}",
-    \ }
+" Colors {{{
+if has('gui_running')
+    set background=dark
+    colorscheme base16-monokai
+else
+    set background=dark
+    colorscheme gruvbox
+endif
+" }}}
+
+" Airline {{{
+let g:airline_powerline_fonts=1
+let g:airline#extensions#wordcount#enabled=0
+let g:airline#extensions#whitespace#enabled=0
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#default#layout=[
+    \ ['a', 'c'],
+    \ ['x', 'z'],
+    \ ]
 " }}}
 
 " Word Motion {{{
@@ -205,11 +215,19 @@ let g:ale_lint_on_enter=0
 let g:ale_lint_on_text_changed='never'
 let g:ale_lint_on_insert_leave=1
 let g:ale_set_highlights=0
+let g:ale_set_quickfix=1
 let g:ale_set_signs=0
 let g:ale_linters={
     \ 'python': ['flake8']
     \ }
 let g:ale_python_flake8_args='--ignore=E501,W291' " line too long, trailing whitespace
+" }}}
+
+" Grepper {{{
+let g:grepper = {}
+let g:grepper.tools=['git', 'ag']
+let g:grepper.open=1
+let g:grepper.jump=0
 " }}}
 
 " Commands {{{
@@ -265,6 +283,10 @@ nmap <silent> ah <Plug>GitGutterTextObjectOuterVisual
 nmap <silent> ]l <Plug>(ale_next)
 nmap <silent> [l <Plug>(ale_previous)
 nmap <silent> <leader>l <Plug>(ale_lint)
+
+" Grepper shortcuts
+nmap <silent> gs <Plug>(GrepperOperator)
+vmap <silent> gs <Plug>(GrepperOperator)
 
 " Wrap a word in quotes
 nnoremap <silent> <leader>q' ciw'<C-R><C-O>"'<Esc>
