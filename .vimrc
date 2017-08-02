@@ -111,6 +111,10 @@ else
     set termguicolors
     set lazyredraw
     set ttyfast
+
+    if &term ~= '256color'
+        set t_ut=
+    endif
 endif
 " }}}
 
