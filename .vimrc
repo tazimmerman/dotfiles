@@ -165,6 +165,8 @@ packadd! vim-wordmotion
 
 packadd! python-syntax
 packadd! vim-python-pep8-indent
+packadd! vim-javascript
+packadd! vim-vue
 " }}}
 
 " PaperColor {{{
@@ -230,8 +232,7 @@ let g:ale_python_flake8_args='--ignore=E501,W291' " line too long, trailing whit
 " Grepper {{{
 let g:grepper = {}
 let g:grepper.tools=['git', 'ag']
-let g:grepper.open=1
-let g:grepper.jump=0
+let g:grepper.prompt=0
 " }}}
 
 " Commands {{{
