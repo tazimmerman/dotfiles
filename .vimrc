@@ -213,7 +213,6 @@ let g:probe_mappings={'select_next': '<c-j>', 'select_prev': '<c-k>'}
 " Git Gutter {{{
 let g:gitgutter_realtime=0
 let g:gitgutter_map_keys=0
-let g:gitgutter_sign_column_always=1
 " }}}
 
 " ALE {{{
