@@ -52,7 +52,7 @@ set pumheight=15
 " Wild Ignore {{{
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 set wildignore+=*/tmp/*,*/research-data/*,*/test-data/*
-set wildignore+=*.pyc,*.pyo,*.pyd
+set wildignore+=*.pyc,*.pyo,*.pyd,*/__pycache__/*
 set wildignore+=*.so,*.o,*.dll,*.lib,*.obj,*.exe
 set wildignore+=*.ttf,*.pdf,*.xls,*.xlsx,*.doc,*.docx
 set wildignore+=*.h5,*.pcl,*.dat
@@ -104,7 +104,7 @@ if has('gui_macvim')
     set guifont=Sauce\ Code\ Powerline:h16
     set transparency=10
 elseif has('gui_running')
-    set guifont=Fantasque\ Sans\ Mono\ 12
+    set guifont=mononoki\ 10
 else
     set t_8f=[38;2;%lu;%lu;%lum
     set t_8b=[48;2;%lu;%lu;%lum
@@ -144,7 +144,6 @@ syntax sync fromstart
 
 " Plug-ins {{{
 packadd! Alduin
-packadd! Despacio
 packadd! Sierra
 packadd! base16-vim
 packadd! gruvbox
@@ -166,7 +165,6 @@ packadd! vim-wordmotion
 packadd! python-syntax
 packadd! vim-python-pep8-indent
 packadd! vim-javascript
-packadd! vim-vue
 " }}}
 
 " PaperColor {{{
@@ -191,6 +189,7 @@ endif
 
 " Airline {{{
 let g:airline_powerline_fonts=1
+let g:airline_theme=has('gui_running') ? 'base16_monokai' : 'gruvbox'
 let g:airline#extensions#wordcount#enabled=0
 let g:airline#extensions#whitespace#enabled=0
 let g:airline#extensions#tabline#enabled=1
@@ -216,11 +215,9 @@ let g:gitgutter_map_keys=0
 " }}}
 
 " ALE {{{
-let g:ale_lint_on_enter=0
 let g:ale_lint_on_text_changed='never'
 let g:ale_lint_on_insert_leave=1
 let g:ale_set_highlights=0
-let g:ale_set_quickfix=1
 let g:ale_set_signs=0
 let g:ale_linters={
     \ 'python': ['flake8']
