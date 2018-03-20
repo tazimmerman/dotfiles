@@ -16,6 +16,7 @@ set scrolloff=5
 set showmatch
 set switchbuf=usetab
 set tags=./tags;
+set updatetime=500
 set virtualedit=block
 " }}}
 
@@ -28,6 +29,10 @@ if has('unix')
     endif
     set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
+" }}}
+
+" {{{ Quickfix
+set errorformat^=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 " }}}
 
 " Search {{{
@@ -177,6 +182,12 @@ let g:PaperColor_Theme_Options={
     \ }
 " }}}
 
+" Gruvbox {{{
+let g:gruvbox_italics=1
+let g:gruvbox_italicize_strings=1
+let g:gruvbox_number_column='bg1'
+" }}}
+
 " Colors {{{
 if has('gui_running')
     set background=dark
@@ -209,11 +220,6 @@ let g:probe_use_wildignore=1
 let g:probe_mappings={'select_next': '<c-j>', 'select_prev': '<c-k>'}
 " }}}
 
-" Git Gutter {{{
-let g:gitgutter_realtime=0
-let g:gitgutter_map_keys=0
-" }}}
-
 " ALE {{{
 let g:ale_lint_on_text_changed='never'
 let g:ale_lint_on_insert_leave=1
@@ -222,7 +228,7 @@ let g:ale_set_signs=0
 let g:ale_linters={
     \ 'python': ['flake8']
     \ }
-let g:ale_python_flake8_args='--ignore=E501,W291' " line too long, trailing whitespace
+let g:ale_python_flake8_args='--ignore=E501,W291,E722' " line too long, trailing whitespace, bare except
 " }}}
 
 " Grepper {{{
@@ -270,16 +276,6 @@ nnoremap <silent> <ESC> :let @/=""<CR>
 nnoremap <silent> <leader>f :ProbeFindInRepo<CR>
 nnoremap <silent> <leader>F :ProbeFindBuffer<CR>
 
-" Git Gutter shortcuts
-nmap <silent> <leader>h <Plug>GitGutterStageHunk
-nmap <silent> <leader>H <Plug>GitGutterUndoHunk
-nmap <silent> ]h <Plug>GitGutterNextHunk
-nmap <silent> [h <Plug>GitGutterPrevHunk
-nmap <silent> ih <Plug>GitGutterTextObjectInnerPending
-nmap <silent> ah <Plug>GitGutterTextObjectOuterPending
-nmap <silent> ih <Plug>GitGutterTextObjectInnerVisual
-nmap <silent> ah <Plug>GitGutterTextObjectOuterVisual
-
 " ALE shortcuts
 nmap <silent> ]l <Plug>(ale_next)
 nmap <silent> [l <Plug>(ale_previous)
@@ -302,7 +298,7 @@ nnoremap <silent> <leader>q< ciw<<C-R><C-O>"><Esc>
 nnoremap <silent> g[ :pop<CR>
 
 " Preview tag
-nnoremap <silent> <leader>p :ptjump <C-R>=expand("<cword>")<CR><CR>
+nnoremap <silent> g\ :ptjump <C-R>=expand("<cword>")<CR><CR>
 
 " Move lines with indent
 nnoremap <silent> <Up> :move-2<CR>==
