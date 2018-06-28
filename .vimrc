@@ -109,11 +109,14 @@ if has('gui_macvim')
     set guifont=Sauce\ Code\ Powerline:h16
     set transparency=10
 elseif has('gui_running')
-    set guifont=mononoki\ 10
+    set guifont=mononoki\ 11
 else
-    set t_8f=[38;2;%lu;%lu;%lum
-    set t_8b=[48;2;%lu;%lu;%lum
-    set termguicolors
+    if &term =~ 'st'
+        set t_8f=[38;2;%lu;%lu;%lum
+        set t_8b=[48;2;%lu;%lu;%lum
+        set termguicolors
+    endif
+
     set lazyredraw
     set ttyfast
 
@@ -225,16 +228,21 @@ let g:ale_lint_on_text_changed='never'
 let g:ale_lint_on_insert_leave=1
 let g:ale_set_highlights=0
 let g:ale_set_signs=0
+let g:ale_set_balloons=0
 let g:ale_linters={
     \ 'python': ['flake8']
     \ }
-let g:ale_python_flake8_args='--ignore=E501,W291,E722' " line too long, trailing whitespace, bare except
+let g:ale_python_flake8_options='--ignore=E501,W291,E722' " line too long, trailing whitespace, bare except
 " }}}
 
 " Grepper {{{
 let g:grepper = {}
-let g:grepper.tools=['git', 'ag']
+let g:grepper.tools=['ag', 'sift']
 let g:grepper.prompt=0
+" }}}
+
+" Git Gutter {{{
+let g:gitgutter_terminal_reports_focus=0
 " }}}
 
 " Commands {{{
