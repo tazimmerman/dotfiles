@@ -151,8 +151,6 @@ syntax sync fromstart
 " }}}
 
 " Plug-ins {{{
-packadd! Alduin
-packadd! Sierra
 packadd! base16-vim
 packadd! gruvbox
 packadd! papercolor-theme
