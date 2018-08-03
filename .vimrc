@@ -216,13 +216,6 @@ let g:airline#extensions#default#layout=[
 let g:wordmotion_prefix='<leader>'
 " }}}
 
-" Probe {{{
-let g:probe_use_gitignore=1
-let g:probe_use_wildignore=1
-let g:probe_mappings={'select_next': '<c-j>', 'select_prev': '<c-k>'}
-let g:probe_cache_dir='/tmp'
-" }}}
-
 " ALE {{{
 let g:ale_lint_on_text_changed='never'
 let g:ale_lint_on_insert_leave=1
@@ -279,10 +272,6 @@ nnoremap <silent> c, #``cgn
 
 " Reset search pattern
 nnoremap <silent> <ESC> :let @/=""<CR>
-
-" Probe shortcuts
-nnoremap <silent> <leader>f :ProbeFindInRepo<CR>
-nnoremap <silent> <leader>F :ProbeFindBuffer<CR>
 
 " ALE shortcuts
 nmap <silent> ]l <Plug>(ale_next)
@@ -381,6 +370,24 @@ function! s:pack_tags()
     endfor
 endfunction
 command! -nargs=0 HelpTags :call <SID>pack_tags()
+" }}}
+
+" Dmenu {{{
+function! s:chomp(str)
+    return substitute(a:str, '\n$', '', '')
+endfunction
+
+function! s:dmenu(cmd)
+    let fn = <SID>chomp(system("git ls-files | dmenu -b -i -l 20 -p " . a:cmd))
+    if empty(fn)
+        return
+    endif
+    exec a:cmd . " " . fn
+endfunction
+
+nnoremap <silent> <leader>fd :call <SID>dmenu("edit")<CR>
+nnoremap <silent> <leader>fs :call <SID>dmenu("split")<CR>
+nnoremap <silent> <leader>fv :call <SID>dmenu("vsplit")<CR>
 " }}}
 
 " Local {{{
