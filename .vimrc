@@ -360,33 +360,57 @@ vnoremap <silent> <leader>k :call <SID>google_it(<SID>get_visual_selection())<CR
 nnoremap <silent> <leader>k :call <SID>google_it(expand("<cWORD>"))<CR>
 " }}}
 
-" pack_tags() {{{
-function! s:pack_tags()
-    for entry in expand(glob('~/.vim').'**/doc', 0, 1)
-        if isdirectory(entry)
-            exec 'helptags' entry
-        endif
-    endfor
-endfunction
-command! -nargs=0 HelpTags :call <SID>pack_tags()
-" }}}
-
 " Dmenu {{{
-function! s:chomp(str)
-    return substitute(a:str, '\n$', '', '')
-endfunction
+let g:dmenu = {}
+let g:dmenu.cmd='git ls-files'
+let g:dmenu.lines=20
 
-function! s:dmenu(cmd)
-    let fn = <SID>chomp(system("git ls-files | dmenu -b -i -l 20 -p " . a:cmd))
-    if empty(fn)
-        return
+function! s:get_dmenu_cfg()
+    if !exists("g:dmenu")
+        let g:dmenu = {}
     endif
-    exec a:cmd . " " . fn
+
+    if !has_key(g:dmenu, 'cmd')
+        let g:dmenu.cmd='find .'
+    endif
+
+    if !has_key(g:dmenu, 'bg')
+        let g:dmenu.bg=synIDattr(synIDtrans(hlID('Normal')), 'bg')
+    endif
+
+    if !has_key(g:dmenu, 'fg')
+        let g:dmenu.fg=synIDattr(synIDtrans(hlID('Normal')), 'fg')
+    endif
+
+    if !has_key(g:dmenu, 'lines')
+        let g:dmenu.lines=10
+    endif
+
+    return g:dmenu
 endfunction
 
-nnoremap <silent> <leader>fd :call <SID>dmenu("edit")<CR>
-nnoremap <silent> <leader>fs :call <SID>dmenu("split")<CR>
-nnoremap <silent> <leader>fv :call <SID>dmenu("vsplit")<CR>
+function! s:get_dmenu_cmd(prompt)
+    let cfg = <SID>get_dmenu_cfg()
+    let cmd = get(cfg, 'cmd')
+    let cmd .= " | dmenu -b -i"
+    let cmd .= " -l " . get(cfg, 'lines')
+    let cmd .= " -nb \"" . get(cfg, 'bg') . "\""
+    let cmd .= " -nf \"" . get(cfg, 'fg') . "\""
+    let cmd .= " -p " . a:prompt
+    return cmd
+endfunction
+
+function! s:open_dmenu(cmd)
+    let cmd = <SID>get_dmenu_cmd(a:cmd)
+    let fn = substitute(system(cmd), '\n$', '', '')
+    if !empty(fn)
+        exec a:cmd . " " . fn
+    endif
+endfunction
+
+nnoremap <silent> <leader>fd :call <SID>open_dmenu("edit")<CR>
+nnoremap <silent> <leader>fs :call <SID>open_dmenu("split")<CR>
+nnoremap <silent> <leader>fv :call <SID>open_dmenu("vsplit")<CR>
 " }}}
 
 " Local {{{
