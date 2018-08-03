@@ -156,6 +156,7 @@ packadd! Sierra
 packadd! base16-vim
 packadd! gruvbox
 packadd! papercolor-theme
+packadd! tender.vim
 packadd! vim-airline
 packadd! vim-airline-themes
 
@@ -221,6 +222,7 @@ let g:wordmotion_prefix='<leader>'
 let g:probe_use_gitignore=1
 let g:probe_use_wildignore=1
 let g:probe_mappings={'select_next': '<c-j>', 'select_prev': '<c-k>'}
+let g:probe_cache_dir='/tmp'
 " }}}
 
 " ALE {{{
