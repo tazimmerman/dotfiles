@@ -151,7 +151,7 @@ syntax sync fromstart
 " }}}
 
 " Plug-ins {{{
-packadd! base16-vim
+packadd! badwolf
 packadd! gruvbox
 packadd! papercolor-theme
 packadd! tender.vim
@@ -159,6 +159,7 @@ packadd! vim-airline
 packadd! vim-airline-themes
 
 packadd! ale
+packadd! dmenu.vim
 packadd! targets.vim
 packadd! vim-abolish
 packadd! vim-commentary
@@ -183,6 +184,11 @@ let g:PaperColor_Theme_Options={
     \ }
 " }}}
 
+" Badwolf {{{
+let g:badwolf_darkgutter=1
+let g:badwolf_tabline=2
+" }}}
+
 " Gruvbox {{{
 let g:gruvbox_italics=1
 let g:gruvbox_italicize_strings=1
@@ -192,7 +198,7 @@ let g:gruvbox_number_column='bg1'
 " Colors {{{
 if has('gui_running')
     set background=dark
-    colorscheme base16-monokai
+    colorscheme badwolf
 else
     set background=dark
     colorscheme gruvbox
@@ -201,7 +207,7 @@ endif
 
 " Airline {{{
 let g:airline_powerline_fonts=1
-let g:airline_theme=has('gui_running') ? 'base16_monokai' : 'gruvbox'
+let g:airline_theme=has('gui_running') ? 'badwolf' : 'gruvbox'
 let g:airline#extensions#wordcount#enabled=0
 let g:airline#extensions#whitespace#enabled=0
 let g:airline#extensions#tabline#enabled=1
@@ -235,6 +241,13 @@ let g:grepper.prompt=0
 
 " Git Gutter {{{
 let g:gitgutter_terminal_reports_focus=0
+" }}}
+
+" Dmenu {{{
+let g:dmenu = {}
+let g:dmenu.max_lines=20
+let g:dmenu.bottom_menu=1
+let g:dmenu.font_name='mononoki:size=11'
 " }}}
 
 " Commands {{{
@@ -280,6 +293,15 @@ nmap <silent> <leader>l <Plug>(ale_lint)
 " Grepper shortcuts
 nmap <silent> gs <Plug>(GrepperOperator)
 vmap <silent> gs <Plug>(GrepperOperator)
+
+" Dmenu shortcuts
+nmap <silent> <leader>fe <Plug>DmenuEdit
+nmap <silent> <leader>fs <Plug>DmenuSplit
+nmap <silent> <leader>fv <Plug>DmenuVsplit
+
+nmap <silent> <leader>fb <Plug>DmenuBuf
+nmap <silent> <leader>fu <Plug>DmenuSbuf
+nmap <silent> <leader>ff <Plug>DmenuVertSbuf
 
 " Wrap a word in quotes
 nnoremap <silent> <leader>q' ciw'<C-R><C-O>"'<Esc>
@@ -358,59 +380,6 @@ function! s:google_it(phrase)
 endfunction
 vnoremap <silent> <leader>k :call <SID>google_it(<SID>get_visual_selection())<CR>
 nnoremap <silent> <leader>k :call <SID>google_it(expand("<cWORD>"))<CR>
-" }}}
-
-" Dmenu {{{
-let g:dmenu = {}
-let g:dmenu.cmd='git ls-files'
-let g:dmenu.lines=20
-
-function! s:get_dmenu_cfg()
-    if !exists("g:dmenu")
-        let g:dmenu = {}
-    endif
-
-    if !has_key(g:dmenu, 'cmd')
-        let g:dmenu.cmd='find .'
-    endif
-
-    if !has_key(g:dmenu, 'bg')
-        let g:dmenu.bg=synIDattr(synIDtrans(hlID('Normal')), 'bg')
-    endif
-
-    if !has_key(g:dmenu, 'fg')
-        let g:dmenu.fg=synIDattr(synIDtrans(hlID('Normal')), 'fg')
-    endif
-
-    if !has_key(g:dmenu, 'lines')
-        let g:dmenu.lines=10
-    endif
-
-    return g:dmenu
-endfunction
-
-function! s:get_dmenu_cmd(prompt)
-    let cfg = <SID>get_dmenu_cfg()
-    let cmd = get(cfg, 'cmd')
-    let cmd .= " | dmenu -b -i"
-    let cmd .= " -l " . get(cfg, 'lines')
-    let cmd .= " -nb \"" . get(cfg, 'bg') . "\""
-    let cmd .= " -nf \"" . get(cfg, 'fg') . "\""
-    let cmd .= " -p " . a:prompt
-    return cmd
-endfunction
-
-function! s:open_dmenu(cmd)
-    let cmd = <SID>get_dmenu_cmd(a:cmd)
-    let fn = substitute(system(cmd), '\n$', '', '')
-    if !empty(fn)
-        exec a:cmd . " " . fn
-    endif
-endfunction
-
-nnoremap <silent> <leader>fd :call <SID>open_dmenu("edit")<CR>
-nnoremap <silent> <leader>fs :call <SID>open_dmenu("split")<CR>
-nnoremap <silent> <leader>fv :call <SID>open_dmenu("vsplit")<CR>
 " }}}
 
 " Local {{{
