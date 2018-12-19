@@ -35,6 +35,10 @@ endif
 set errorformat^=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 " }}}
 
+" {{{ Diff
+set diffopt-=internal
+" }}}
+
 " Search {{{
 set ignorecase
 set smartcase
@@ -90,8 +94,6 @@ set cursorline
 set display=lastline
 set laststatus=2
 set linebreak
-set number
-set relativenumber
 set ruler
 set mousehide
 set showbreak=\ \ >\  
@@ -380,6 +382,13 @@ function! s:google_it(phrase)
 endfunction
 vnoremap <silent> <leader>k :call <SID>google_it(<SID>get_visual_selection())<CR>
 nnoremap <silent> <leader>k :call <SID>google_it(expand("<cWORD>"))<CR>
+
+function! s:go_to_httpstatuses(code)
+    let url='https://httpstatuses.com/'
+    let code = str2nr(a:code)
+    call system(s:open_cmd . url . code)
+endfunction
+command! -nargs=1 HttpStatus :call <SID>go_to_httpstatuses(<q-args>)
 " }}}
 
 " Local {{{
