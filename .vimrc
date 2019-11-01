@@ -168,6 +168,7 @@ packadd! vim-commentary
 packadd! vim-gitgutter
 packadd! vim-grepper
 packadd! vim-repeat
+packadd! vim-sneak
 packadd! vim-surround
 packadd! vim-wordmotion
 
