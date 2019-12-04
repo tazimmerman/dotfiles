@@ -245,13 +245,6 @@ let g:grepper.prompt=0
 let g:gitgutter_terminal_reports_focus=0
 " }}}
 
-" Dmenu {{{
-let g:dmenu = {}
-let g:dmenu.max_lines=20
-let g:dmenu.bottom_menu=1
-let g:dmenu.font_name='mononoki:size=11'
-" }}}
-
 " Commands {{{
 " Jump to the next diff and obtain it (repeat with @@, followed by @:)
 command! -nargs=0 Fix :normal! ]cdo<CR>
@@ -295,15 +288,6 @@ nmap <silent> <leader>l <Plug>(ale_lint)
 " Grepper shortcuts
 nmap <silent> gs <Plug>(GrepperOperator)
 vmap <silent> gs <Plug>(GrepperOperator)
-
-" Dmenu shortcuts
-nmap <silent> <leader>fe <Plug>DmenuEdit
-nmap <silent> <leader>fs <Plug>DmenuSplit
-nmap <silent> <leader>fv <Plug>DmenuVsplit
-
-nmap <silent> <leader>fb <Plug>DmenuBuf
-nmap <silent> <leader>fu <Plug>DmenuSbuf
-nmap <silent> <leader>ff <Plug>DmenuVertSbuf
 
 " Wrap a word in quotes
 nnoremap <silent> <leader>q' ciw'<C-R><C-O>"'<Esc>
