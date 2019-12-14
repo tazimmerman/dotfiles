@@ -17,9 +17,14 @@ set nowrap
 set scrolloff=5
 set showmatch
 set switchbuf=usetab
-set tags=./tags;
 set updatetime=500
 set virtualedit=block
+" }}}
+
+" Paths {{{
+set exrc
+set path+=include
+set tags=./tags
 " }}}
 
 " Grep {{{
