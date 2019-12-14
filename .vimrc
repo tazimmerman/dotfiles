@@ -421,8 +421,8 @@ if has('nvim')
 
         let opts={
             \ 'relative': 'editor',
-            \ 'row': vertical,
-            \ 'col': horizontal,
+            \ 'row': ypos,
+            \ 'col': xpos,
             \ 'width': width,
             \ 'height': height
             \ }
