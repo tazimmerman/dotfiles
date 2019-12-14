@@ -255,6 +255,11 @@ let g:grepper.prompt=0
 let g:gitgutter_terminal_reports_focus=0
 " }}}
 
+" FZF {{{
+let g:fzf_buffers_jump=1
+let g:fzf_tags_command='ctags -R --exclude=*/__pycache__/* --python-kinds=-i --sorted=yes'
+" }}}
+
 " Commands {{{
 " Jump to the next diff and obtain it (repeat with @@, followed by @:)
 command! -nargs=0 Fix :normal! ]cdo<CR>
@@ -298,6 +303,13 @@ nmap <silent> <leader>l <Plug>(ale_lint)
 " Grepper shortcuts
 nmap <silent> gs <Plug>(GrepperOperator)
 vmap <silent> gs <Plug>(GrepperOperator)
+
+" FZF shortcuts
+nmap <silent> <leader>fe :Files<CR>
+nmap <silent> <leader>fg :GFiles<CR>
+
+nmap <silent> <leader>fb :Buffers<CR>
+nmap <silent> <leader>ft :Tags<CR>
 
 " Wrap a word in quotes
 nnoremap <silent> <leader>q' ciw'<C-R><C-O>"'<Esc>
@@ -383,6 +395,36 @@ function! s:go_to_httpstatuses(code)
     call system(s:open_cmd . url . code)
 endfunction
 command! -nargs=1 HttpStatus :call <SID>go_to_httpstatuses(<q-args>)
+" }}}
+
+" FZF {{{
+if has('nvim')
+    let $FZF_DEFAULT_OPTS='--layout=reverse'
+    let g:fzf_layout={'window': 'call FloatingFZF()'}
+
+    function! FloatingFZF()
+        " scratch, unlisted, new, empty, unnamed buffer
+        let buf=nvim_create_buf(v:false, v:true)
+        " % of the height
+        let height=float2nr(&lines * 0.5)
+        " % of the width
+        let width=float2nr(&columns * 0.5)
+        " horizontal position (centralized)
+        let xpos=float2nr((&columns - width) / 2)
+        " vertical position (one line down from the top)
+        let ypos=1
+
+        let opts={
+            \ 'relative': 'editor',
+            \ 'row': vertical,
+            \ 'col': horizontal,
+            \ 'width': width,
+            \ 'height': height
+            \ }
+
+        call nvim_open_win(buf, v:true, opts)
+    endfunction
+endif
 " }}}
 
 " Local {{{
