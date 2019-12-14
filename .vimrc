@@ -2,7 +2,9 @@
 set autoread
 set backspace=start,indent,eol
 set browsedir=buffer
-set cryptmethod=blowfish2
+if !has('nvim')
+    set cryptmethod=blowfish2
+endif
 set encoding=utf-8
 set fillchars= 
 set formatoptions=tcroqnlj
@@ -55,6 +57,9 @@ set wildignorecase
 set wildmenu
 set wildmode=longest:full,full
 set wildoptions=tagfile
+if has('nvim')
+    set wildoptions+=pum
+endif
 set complete=.,w,b
 set completeopt=menu
 set pumheight=15
@@ -122,7 +127,10 @@ else
     endif
 
     set lazyredraw
-    set ttyfast
+
+    if !has('nvim')
+        set ttyfast
+    endif
 
     if &term =~ '256color'
         set t_ut=
