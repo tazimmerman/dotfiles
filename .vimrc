@@ -26,6 +26,8 @@ if has('unix')
         set grepprg=ag\ --nogroup\ --nocolor\ --column\ --vimgrep
     elseif executable('ack')
         set grepprg=ack\ -s\ --with-filename\ --nocolor\ --nogroup\ --column
+    elseif executable('rg')
+        set grepprg=rg\ --vimgrep
     endif
     set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
@@ -237,7 +239,7 @@ let g:ale_python_flake8_options='--ignore=E501,W291,E722' " line too long, trail
 
 " Grepper {{{
 let g:grepper = {}
-let g:grepper.tools=['ag', 'sift']
+let g:grepper.tools=['rg']
 let g:grepper.prompt=0
 " }}}
 
