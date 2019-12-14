@@ -161,6 +161,7 @@ packadd! vim-airline
 packadd! vim-airline-themes
 
 packadd! ale
+packadd! fzf.vim
 packadd! targets.vim
 packadd! vim-abolish
 packadd! vim-commentary
