@@ -245,7 +245,7 @@ let g:ale_set_highlights=0
 let g:ale_set_signs=0
 let g:ale_set_balloons=0
 let g:ale_linters={
-    \ 'cpp': ['gcc']
+    \ 'cpp': ['gcc'],
     \ 'python': ['flake8']
     \ }
 let g:ale_cpp_gcc_options='-std=c++14 -Wall -Wextra -Wpedantic -Wconversion'
