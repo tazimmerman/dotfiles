@@ -24,7 +24,7 @@ set virtualedit=block
 " Paths {{{
 set exrc
 set path+=include
-set tags=./tags
+set tags=./tags;
 " }}}
 
 " Grep {{{
