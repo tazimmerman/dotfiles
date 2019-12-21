@@ -245,8 +245,10 @@ let g:ale_set_highlights=0
 let g:ale_set_signs=0
 let g:ale_set_balloons=0
 let g:ale_linters={
+    \ 'cpp': ['gcc']
     \ 'python': ['flake8']
     \ }
+let g:ale_cpp_gcc_options='-std=c++14 -Wall -Wextra -Wpedantic -Wconversion'
 let g:ale_python_flake8_options='--ignore=E501,W291,E722' " line too long, trailing whitespace, bare except
 " }}}
 
