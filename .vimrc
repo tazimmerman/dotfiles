@@ -176,6 +176,7 @@ packadd! vim-airline
 packadd! vim-airline-themes
 
 packadd! ale
+packadd! quick-scope
 packadd! fzf.vim
 packadd! targets.vim
 packadd! vim-abolish
@@ -265,6 +266,10 @@ let g:gitgutter_terminal_reports_focus=0
 " FZF {{{
 let g:fzf_buffers_jump=1
 let g:fzf_tags_command='ctags -R --exclude=*/__pycache__/* --python-kinds=-i --sorted=yes'
+" }}}
+
+" Quick Scope {{{
+let g:qs_highlight_on_keys=['f', 'F', 't', 'T']
 " }}}
 
 " Commands {{{
