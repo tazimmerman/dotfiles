@@ -187,6 +187,7 @@ packadd! vim-repeat
 packadd! vim-surround
 packadd! vim-wordmotion
 
+packadd! vim-cpp-modern
 packadd! python-syntax
 packadd! vim-python-pep8-indent
 packadd! vim-javascript
