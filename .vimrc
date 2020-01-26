@@ -225,15 +225,10 @@ endif
 " }}}
 
 " Airline {{{
-let g:airline_powerline_fonts=1
 let g:airline_theme=has('gui_running') ? 'badwolf' : 'gruvbox'
 let g:airline#extensions#wordcount#enabled=0
 let g:airline#extensions#whitespace#enabled=0
 let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#default#layout=[
-    \ ['a', 'c'],
-    \ ['x', 'z'],
-    \ ]
 " }}}
 
 " Word Motion {{{
