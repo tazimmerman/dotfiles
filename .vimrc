@@ -114,7 +114,7 @@ set splitright
 set winminheight=0
 set winminwidth=0
 
-if has('gui') && has("gui_running")
+if has('gui') && has('gui_running')
     set guioptions=aci
 
     if has('gui_macvim')
@@ -242,12 +242,13 @@ let g:ale_python_flake8_options='--ignore=E501,W291,E722' " line too long, trail
 
 " Grepper {{{
 let g:grepper = {}
-let g:grepper.tools=['rg']
+let g:grepper.tools=['git', 'rg']
 let g:grepper.prompt=0
 " }}}
 
 " Git Gutter {{{
 let g:gitgutter_terminal_reports_focus=0
+let g:gitgutter_preview_win_floating=1
 " }}}
 
 " FZF {{{
@@ -324,14 +325,6 @@ nnoremap <silent> g[ :pop<CR>
 
 " Preview tag
 nnoremap <silent> g\ :ptjump <C-R>=expand("<cword>")<CR><CR>
-
-" Move lines with indent
-nnoremap <silent> <Up> :move-2<CR>==
-nnoremap <silent> <Down> :move+<CR>==
-inoremap <silent> <Up> <Esc>:move-2<CR>==gi
-inoremap <silent> <Down> <Esc>:move+<CR>==gi
-vnoremap <silent> <Up> :move'<-2<CR>gv=gv
-vnoremap <silent> <Down> :move'>+<CR>gv=gv
 
 " Indent and return to Visual mode
 vnoremap <silent> < <gv
