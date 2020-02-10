@@ -114,32 +114,23 @@ set splitright
 set winminheight=0
 set winminwidth=0
 
-if has('gui')
+if has('gui') && has("gui_running")
     set guioptions=aci
-endif
 
-if has('gui_macvim')
-    set antialias
-    set guifont=Sauce\ Code\ Powerline:h16
-    set transparency=10
-elseif has('gui_running')
-    set guifont=mononoki\ 11
-else
-    if &term =~ 'st'
-        set t_8f=[38;2;%lu;%lu;%lum
-        set t_8b=[48;2;%lu;%lu;%lum
-        set termguicolors
+    if has('gui_macvim')
+        set antialias
+        set guifont=Sauce\ Code\ Powerline:h16
+        set transparency=10
     endif
-
+else
     set lazyredraw
+    set termguicolors
 
     if !has('nvim')
         set ttyfast
     endif
 
-    if &term =~ '256color'
-        set t_ut=
-    endif
+    set t_ut=
 endif
 " }}}
 
