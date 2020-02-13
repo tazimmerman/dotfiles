@@ -159,6 +159,9 @@ syntax sync fromstart
 " }}}
 
 " Plug-ins {{{
+let g:loaded_netrw=1
+let g:loaded_netrwPlugin=1
+
 packadd! badwolf
 packadd! gruvbox
 packadd! papercolor-theme
