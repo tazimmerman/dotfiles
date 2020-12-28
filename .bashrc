@@ -33,6 +33,21 @@ source ~/.git-completion.bash
 PROMPT_COMMAND='__git_ps1 "\w" "\n\\\$ "'
 PROMPT_DIRTRIM=2
 
+# FZF
+export FZF_DEFAULT_COMMAND='fd --type file'
+export FZF_CONTROL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS='--height=50% --layout=reverse --border --info=hidden'
+source ~/.fzf-completion.bash
+source ~/.fzf-key-bindings.bash
+
+_fzf_compgen_path() {
+    fd --hidden --follow --exclude ".git" . $1
+}
+
+_fzf_compgen_dir() {
+    fd --type d --hidden --follow --exclude ".git" . $1
+}
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/Users/troy/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
